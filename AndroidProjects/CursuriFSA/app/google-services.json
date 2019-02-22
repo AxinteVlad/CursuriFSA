@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "132203962753",
+    "firebase_url": "https://cursurifsa.firebaseio.com",
+    "project_id": "cursurifsa",
+    "storage_bucket": "cursurifsa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:132203962753:android:cfaed0010057cbd5",
+        "android_client_info": {
+          "package_name": "com.axintevlad.cursurifsa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "132203962753-k9ls9nlc5lgbpghjsapgvdp19l1ph4p0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKx7XIYOMAF_q_HJ1ADU4-sFSn2aIs9Ok"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
