@@ -21,6 +21,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
 import org.w3c.dom.Text;
 
@@ -31,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
     private static String TAG = LoginActivity.class.getSimpleName();
 
     private FirebaseAuth mAuth;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     private ProgressDialog loadingBar;
 
@@ -76,6 +82,7 @@ public class LoginActivity extends AppCompatActivity {
         String email = emailEditText.getText().toString();
         String password = passwordEditText.getText().toString();
 
+
         if(TextUtils.isEmpty(email)){
             Toast.makeText(LoginActivity.this, "Introdu un email", Toast.LENGTH_SHORT).show();
         }else if(TextUtils.isEmpty(password)){
@@ -90,6 +97,14 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
+                        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                        String userUID = currentUser.getUid();
+                        // Create a reference to the cities collection
+                        CollectionReference citiesRef = db.collection("useri");
+
+                        // Create a query against the collection.
+                        Query query = citiesRef.whereEqualTo("userUID", userUID);
+
                         Toast.makeText(LoginActivity.this, "Te-ai logat!", Toast.LENGTH_SHORT).show();
                         loadingBar.dismiss();
                         changeActivity();
