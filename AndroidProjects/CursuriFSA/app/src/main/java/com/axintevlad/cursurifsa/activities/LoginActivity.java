@@ -1,9 +1,10 @@
 package com.axintevlad.cursurifsa.activities;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.nfc.Tag;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,37 +12,35 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.axintevlad.cursurifsa.MainActivity;
 import com.axintevlad.cursurifsa.R;
+import com.axintevlad.cursurifsa.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 
-import org.w3c.dom.Text;
-
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
     private static String TAG = LoginActivity.class.getSimpleName();
-
+    private static String tip_profesor = "profesor";
     private FirebaseAuth mAuth;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    private ProgressDialog loadingBar;
 
     private Button buttonLogin,buttonSignup;
     private TextView emailEditText,passwordEditText;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
         emailEditText = findViewById(R.id.text_email);
         passwordEditText = findViewById(R.id.text_password);
         mAuth = FirebaseAuth.getInstance();
-        loadingBar = new ProgressDialog(this);
+
 
         if(mAuth.getCurrentUser() != null){
             logIn();
@@ -83,35 +82,59 @@ public class LoginActivity extends AppCompatActivity {
         String password = passwordEditText.getText().toString();
 
 
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(false); // if you want user to wait for some process to finish,
+        builder.setView(R.layout.layout_loading_dialog);
+        final AlertDialog dialog = builder.create();
+
         if(TextUtils.isEmpty(email)){
             Toast.makeText(LoginActivity.this, "Introdu un email", Toast.LENGTH_SHORT).show();
         }else if(TextUtils.isEmpty(password)){
             Toast.makeText(LoginActivity.this, "Introdu o parola", Toast.LENGTH_SHORT).show();
         }else{
-            loadingBar.setTitle("Login");
-            loadingBar.setMessage("Asteptati");
-            loadingBar.show();
-            loadingBar.setCanceledOnTouchOutside(true);
+
+            dialog.show();
 
             mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
-                        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-                        String userUID = currentUser.getUid();
-                        // Create a reference to the cities collection
-                        CollectionReference citiesRef = db.collection("useri");
 
-                        // Create a query against the collection.
-                        Query query = citiesRef.whereEqualTo("userUID", userUID);
+                        String userUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
+                        final DocumentReference docRef = db.collection("useri").document(userUID);
+                        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()) {
+                                    DocumentSnapshot document = task.getResult();
+                                    if (document.exists()) {
+                                        User user = document.toObject(User.class);
+                                        Log.d(TAG, "DocumentSnapshot data: " + document.getData()+"///////////" + user.getTip());
+                                        if(user.getTip().equals(tip_profesor)){
+                                            //inchide progress
+                                            dialog.dismiss();
+                                            Intent intent = new Intent(LoginActivity.this, ProfesorActivity.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }else{
+                                            //inchide progress
+                                            dialog.dismiss();
+                                            changeActivity();
+                                        }
+                                    }else{
+                                        Log.d(TAG, "No document in db on login");
+                                    }
+                                }
+                            }
+                        });
                         Toast.makeText(LoginActivity.this, "Te-ai logat!", Toast.LENGTH_SHORT).show();
-                        loadingBar.dismiss();
-                        changeActivity();
+
                     }else{
                         String message = task.getException().toString();
                         Toast.makeText(LoginActivity.this, "Eroare + "+ message, Toast.LENGTH_SHORT).show();
-                        loadingBar.dismiss();
+                        //inchide progress
+                        dialog.dismiss();
                     }
                 }
             });
@@ -124,4 +147,5 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
 }

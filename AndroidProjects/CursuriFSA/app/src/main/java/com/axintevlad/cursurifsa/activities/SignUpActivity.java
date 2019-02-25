@@ -1,5 +1,6 @@
 package com.axintevlad.cursurifsa.activities;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -30,12 +31,11 @@ import java.util.Map;
 
 public class SignUpActivity extends AppCompatActivity {
     private static final String TAG = "SignUpActivity";
-    Map<String,Object> user = new HashMap<>();
+    private Map<String,Object> user = new HashMap<>();
     private FirebaseAuth mAuth;
     private Button signup;
     private TextView emailEditText;
     private TextView passwordEditText;
-    private ProgressDialog loadingBar;
     private Switch userType;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -50,11 +50,8 @@ public class SignUpActivity extends AppCompatActivity {
         emailEditText = findViewById(R.id.text_email);
         passwordEditText = findViewById(R.id.text_password);
         userType = findViewById(R.id.switch_usertype);
-        loadingBar = new ProgressDialog(this);
 
-//        if(mAuth.getCurrentUser() != null){
-//            logIn();
-//        }
+
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,6 +63,11 @@ public class SignUpActivity extends AppCompatActivity {
     private void crateNewAccount() {
         String email = emailEditText.getText().toString();
         String password = passwordEditText.getText().toString();
+        //progress bar
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(false); // if you want user to wait for some process to finish,
+        builder.setView(R.layout.layout_loading_dialog);
+        final AlertDialog dialog = builder.create();
 
         if(TextUtils.isEmpty(email)){
             Toast.makeText(this,"Nu ai introdus un email",Toast.LENGTH_SHORT).show();
@@ -73,10 +75,7 @@ public class SignUpActivity extends AppCompatActivity {
             Toast.makeText(this,"Nu ai introdus o parola",Toast.LENGTH_SHORT).show();
         }
         else{
-            loadingBar.setTitle("Se creaza contul");
-            loadingBar.setMessage("Asteptati");
-            loadingBar.show();
-            loadingBar.setCanceledOnTouchOutside(true);
+            dialog.show();
             if(userType.isChecked()) {
                 user.put("email",email);
                 user.put("tip","profesor");
@@ -91,26 +90,26 @@ public class SignUpActivity extends AppCompatActivity {
                         Toast.makeText(SignUpActivity.this, "Inregistrat", Toast.LENGTH_SHORT).show();
                         String userUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
                         user.put("userUID",userUID);
-                        db.collection("useri").add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        db.collection("useri/").document(userUID).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                            public void onSuccess(Void aVoid) {
+                                Log.d(TAG, "User adaugat in bd ");
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Log.w(TAG, "Error adding document", e);
+                                Log.w(TAG, "Error adding document in bd", e);
                             }
                         });
 
-                        loadingBar.dismiss();
+                        dialog.dismiss();
                         logIn();
 
                     }else
                         {
                         String message = task.getException().getMessage();
                         Toast.makeText(SignUpActivity.this, "Error:" + message, Toast.LENGTH_SHORT).show();
-                        loadingBar.dismiss();
+                        dialog.dismiss();
                         }
                 }
             });
