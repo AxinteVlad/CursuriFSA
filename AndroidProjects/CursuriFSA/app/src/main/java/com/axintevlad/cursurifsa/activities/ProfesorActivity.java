@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import com.axintevlad.cursurifsa.R;
 
-public class ProfesorActivity extends AppCompatActivity {
+public class ProfesorActivity extends NavDrawerActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

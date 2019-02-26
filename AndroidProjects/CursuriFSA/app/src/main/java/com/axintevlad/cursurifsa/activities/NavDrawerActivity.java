@@ -1,16 +1,15 @@
-package com.axintevlad.cursurifsa;
+package com.axintevlad.cursurifsa.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.axintevlad.cursurifsa.activities.NavDrawerActivity;
+import com.axintevlad.cursurifsa.R;
 
-public class MainActivity extends NavDrawerActivity {
+public class NavDrawerActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+        setContentView(R.layout.activity_nav_drawer);
     }
 }
