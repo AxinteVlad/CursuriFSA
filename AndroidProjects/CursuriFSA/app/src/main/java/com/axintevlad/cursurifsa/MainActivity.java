@@ -13,4 +13,9 @@ public class MainActivity extends NavDrawerActivity {
         setContentView(R.layout.activity_main);
 
     }
+
+    @Override
+    protected int getNavigationItemID() {
+        return R.id.nav_home;
+    }
 }

@@ -2,23 +2,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:id="@+id/nav_home"
-        android:title="Home">
+        android:title="@string/Home">
     </item>
 
     <item android:id="@+id/nav_cursuri"
-        android:title="Cursuri">
+        android:title="@string/Cursuri">
     </item>
 
     <item android:id="@+id/nav_orar"
-        android:title="Orar">
+        android:title="@string/Orar">
     </item>
 
     <item android:id="@+id/nav_calendar_examene"
-        android:title="Calendar Examene">
+        android:title="@string/Calendar_Examene">
     </item>
 
     <item android:id="@+id/nav_logout"
-        android:title="Log Out">
+        android:title="@string/logout">
     </item>
 
 
