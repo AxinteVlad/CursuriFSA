@@ -16,9 +16,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.axintevlad.cursurifsa.MainActivity;
 import com.axintevlad.cursurifsa.R;
+import com.axintevlad.cursurifsa.models.User;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 
 public abstract class NavDrawerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -30,11 +34,10 @@ public abstract class NavDrawerActivity extends AppCompatActivity implements Nav
 
     private String TAG = NavDrawerActivity.class.getSimpleName();
 
-    //private String mFullName, mEmail;
-    //private TextView mFullNameTextView, mEmailTextView;
-    //private ImageView mProfileImageView;
-    //SharedPrefManager sharedPrefManager;
-    //Context mContext = this;
+    private TextView mEmailTextView;
+
+    private FirebaseAuth mAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,23 +52,28 @@ public abstract class NavDrawerActivity extends AppCompatActivity implements Nav
         mDrawerLayout.addDrawerListener(mDrawerToggle);
         mDrawerToggle.syncState();
 
+        mAuth = FirebaseAuth.getInstance();
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         try {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }catch (Exception e){
-            Log.e(TAG, "Eroare la getSupportActionBar ",e );
+            Log.e(TAG, "Eroare la setDisplayHomeAsUpEnabled ",e );
 
         }
         navigation_view.setNavigationItemSelectedListener(this);
 
         //Initializare nume,email,poza
-        //View header = navigation_view.getHeaderView(0);
-        //mFullNameTextView = header.findViewById(R.id.nav_header_name);
-        //mEmailTextView = header.findViewById(R.id.nav_header_email);
-        //mProfileImageView = header.findViewById(R.id.nav_header_photo);
+        View header = navigation_view.getHeaderView(0);
+        mEmailTextView = header.findViewById(R.id.nav_header_email);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user != null){
+            mEmailTextView.setText(user.getEmail());
+        }
 
-        // create an object of sharedPreferenceManager and get stored user data
+
+
 
     }
 
@@ -159,6 +167,13 @@ public abstract class NavDrawerActivity extends AppCompatActivity implements Nav
                 Log.d(TAG, "open About Activity");
                 Intent a = new Intent(this, MainActivity.class);
                 startActivity(a);
+                break;
+            case R.id.nav_logout:
+                Log.d(TAG, "open About Activity");
+                mAuth.signOut();
+                Intent l = new Intent(this, LoginActivity.class);
+                startActivity(l);
+                finish();
                 break;
 
         }
