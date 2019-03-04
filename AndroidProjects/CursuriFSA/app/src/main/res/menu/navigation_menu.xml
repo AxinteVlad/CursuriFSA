@@ -2,23 +2,28 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:id="@+id/nav_home"
-        android:title="@string/Home">
+        android:title="@string/Home"
+        android:icon="@drawable/ic_home">
     </item>
 
     <item android:id="@+id/nav_cursuri"
-        android:title="@string/Cursuri">
+        android:title="@string/Cursuri"
+        android:icon="@drawable/ic_cursuri">
     </item>
 
     <item android:id="@+id/nav_orar"
-        android:title="@string/Orar">
+        android:title="@string/Orar"
+        android:icon="@drawable/ic_orar">
     </item>
 
     <item android:id="@+id/nav_calendar_examene"
-        android:title="@string/Calendar_Examene">
+        android:title="@string/Calendar_Examene"
+        android:icon="@drawable/ic_calendar">
     </item>
 
     <item android:id="@+id/nav_logout"
-        android:title="@string/logout">
+        android:title="@string/logout"
+        android:icon="@drawable/ic_logout">
     </item>
 
 
