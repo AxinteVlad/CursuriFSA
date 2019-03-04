@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">CursuriFSA</string>
+
+    <string name="Home">Home</string>
+    <string name="Cursuri">Cursuri</string>
+    <string name="Orar">Orar</string>
+    <string name="Calendar_Examene">Calendar Examene</string>
+    <string name="logout"> Log Out</string>
+
+    <string name="nav_open">Open</string>
+    <string name="nav_clsed">Closed</string>
+
 </resources>
