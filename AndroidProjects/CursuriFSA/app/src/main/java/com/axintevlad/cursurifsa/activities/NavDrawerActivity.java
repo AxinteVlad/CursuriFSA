@@ -154,7 +154,7 @@ public abstract class NavDrawerActivity extends AppCompatActivity implements Nav
         switch (item) {
             case R.id.nav_home:
                 Log.d(TAG, "open Home Activity");
-                Intent i = new Intent(this, MainActivity.class);
+                Intent i = new Intent(this, AnActivity.class);
                 startActivity(i);
                 break;
             case R.id.nav_cursuri:
