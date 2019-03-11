@@ -114,7 +114,7 @@ public class LoginActivity extends AppCompatActivity {
                                         if(user.getTip().equals(tip_profesor)){
                                             //inchide progress
                                             dialog.dismiss();
-                                            Intent intent = new Intent(LoginActivity.this, ProfesorActivity.class);
+                                            Intent intent = new Intent(LoginActivity.this, AnActivity.class);
                                             startActivity(intent);
                                             finish();
                                         }else{
@@ -143,7 +143,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void changeActivity(){
         //trece la mainactivity
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        Intent intent = new Intent(LoginActivity.this, AnActivity.class);
         startActivity(intent);
         finish();
     }
