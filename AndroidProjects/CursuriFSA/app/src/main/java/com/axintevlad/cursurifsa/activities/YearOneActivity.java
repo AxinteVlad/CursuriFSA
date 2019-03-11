@@ -1,9 +1,12 @@
 package com.axintevlad.cursurifsa.activities;
 
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.axintevlad.cursurifsa.R;
 import com.axintevlad.cursurifsa.adapters.MaterieAdapter;
@@ -20,6 +23,7 @@ public class YearOneActivity extends NavDrawerActivity {
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
+    private ProgressBar progressBar;
 
     private List<Materie> materieList;
     private FirebaseFirestore db;
@@ -29,6 +33,8 @@ public class YearOneActivity extends NavDrawerActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_year_one);
 
+        FloatingActionButton fab = findViewById(R.id.fab);
+        progressBar = findViewById(R.id.progressbar);
         recyclerView = findViewById(R.id.yearOne_recylcleView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -48,6 +54,8 @@ public class YearOneActivity extends NavDrawerActivity {
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        progressBar.setVisibility(View.GONE);
+
                         if(!queryDocumentSnapshots.isEmpty()){
                             List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
 
@@ -59,6 +67,14 @@ public class YearOneActivity extends NavDrawerActivity {
                         }
                     }
                 });
+
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //start activity or fragment
+            }
+        });
     }
 
     @Override
