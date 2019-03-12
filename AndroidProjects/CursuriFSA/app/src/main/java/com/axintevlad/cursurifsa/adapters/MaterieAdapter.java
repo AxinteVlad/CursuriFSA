@@ -9,53 +9,53 @@ import android.widget.TextView;
 
 import com.axintevlad.cursurifsa.R;
 import com.axintevlad.cursurifsa.models.Materie;
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.DocumentSnapshot;
+
 import java.util.List;
 
 /**
  * Created by vlad__000 on 04-Mar-19.
  */
-public class MaterieAdapter  extends RecyclerView.Adapter<MaterieAdapter.ViewHolder> {
+public class MaterieAdapter  extends FirestoreRecyclerAdapter<Materie,MaterieAdapter.MaterieHolder> {
 
-    private List<Materie> materieList;
-    private Context context;
+    public MaterieAdapter(FirestoreRecyclerOptions<Materie> options){
+        super(options);
+    }
 
-    public MaterieAdapter(List<Materie> materieList, Context context) {
-        this.materieList = materieList;
-        this.context = context;
+    @Override
+    protected void onBindViewHolder(@NonNull MaterieHolder holder, int position, @NonNull Materie model) {
+        holder.textViewTitlu.setText(model.getTitlu());
+        holder.textViewDescriere.setText(model.getDescriere());
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.cardview_materie,viewGroup,false);
-        return new ViewHolder(v);
+    public MaterieHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_materie,
+                parent, false);
+        return new MaterieHolder(v);
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
-        Materie materie = materieList.get(position);
-        viewHolder.textViewTitlu.setText(materie.getNume());
-        viewHolder.textViewDescriere.setText(materie.getDescriere());
+    public interface OnItemClickListener{
+        void onItemClick(DocumentSnapshot documentSnapshot,int position);
     }
 
-    @Override
-    public int getItemCount() {
-        return materieList.size();
+    public void setOnItemClickListener(OnItemClickListener listener){
+      //  this.listener =listener;
+
     }
+    class MaterieHolder extends RecyclerView.ViewHolder {
+        TextView textViewTitlu;
+        TextView textViewDescriere;
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
 
-        public TextView textViewTitlu;
-        public TextView textViewDescriere;
-
-        public ViewHolder(@NonNull View itemView) {
+        public MaterieHolder(View itemView) {
             super(itemView);
             textViewTitlu = itemView.findViewById(R.id.text_titlu);
             textViewDescriere = itemView.findViewById(R.id.text_descriere);
+
         }
     }
-
-    private List<Materie> mList;
-
 }

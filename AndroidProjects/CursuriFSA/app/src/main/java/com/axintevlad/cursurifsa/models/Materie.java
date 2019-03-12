@@ -6,25 +6,30 @@ import java.util.ArrayList;
  * Created by vlad__000 on 04-Mar-19.
  */
 public class Materie {
-    private String nume;
+    private String titlu;
     private String descriere;
-//    private ArrayList<Cursuri> listaCursuri;
+//    private ArrayList<Curs> listaCurs;
 //    private ArrayList<Teme> listaTeme;
 //    private ArrayList<Resurse> listaResurse;
 
+    public Materie() { }
+    public Materie(String nume, String descriere) {
+        this.titlu = nume;
+        this.descriere = descriere;
+    }
 
-//    public ArrayList<Cursuri> getListaCursuri() {
-//        return listaCursuri;
+//    public ArrayList<Curs> getListaCurs() {
+//        return listaCurs;
 //    }
 //
-//    public void setListaCursuri(ArrayList<Cursuri> listaCursuri) {
-//        this.listaCursuri = listaCursuri;
+//    public void setListaCurs(ArrayList<Curs> listaCurs) {
+//        this.listaCurs = listaCurs;
 //    }
 //
 //    public ArrayList<Teme> getListaTeme() {
 //        return listaTeme;
 //    }
-
+//
 //    public void setListaTeme(ArrayList<Teme> listaTeme) {
 //        this.listaTeme = listaTeme;
 //    }
@@ -37,12 +42,12 @@ public class Materie {
 //        this.listaResurse = listaResurse;
 //    }
 
-    public String getNume() {
-        return nume;
+    public String getTitlu() {
+        return titlu;
     }
 
     public void setNume(String nume) {
-        this.nume = nume;
+        this.titlu = nume;
     }
 
     public String getDescriere() {

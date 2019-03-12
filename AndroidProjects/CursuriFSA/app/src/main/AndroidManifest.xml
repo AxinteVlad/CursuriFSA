@@ -9,23 +9,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".activities.YearFourActivity"></activity>
+        <activity android:name=".activities.SaveMaterieActivity"></activity>
+        <activity android:name=".activities.YearFourActivity" />
         <activity android:name=".activities.YearThreeActivity" />
         <activity android:name=".activities.YearTwoActivity" />
         <activity android:name=".activities.YearOneActivity" />
         <activity android:name=".activities.AnActivity">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".activities.ProfesorActivity" />
         <activity android:name=".activities.SignUpActivity" />
         <activity android:name=".activities.LoginActivity" />
-        <activity android:name=".MainActivity">
-
-        </activity>
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>
