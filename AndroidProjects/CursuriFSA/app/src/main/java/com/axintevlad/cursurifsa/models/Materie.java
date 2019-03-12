@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Created by vlad__000 on 04-Mar-19.
  */
 public class Materie {
-    private String nume;
+    private String titlu;
     private String descriere;
 //    private ArrayList<Curs> listaCurs;
 //    private ArrayList<Teme> listaTeme;
@@ -14,7 +14,7 @@ public class Materie {
 
     public Materie() { }
     public Materie(String nume, String descriere) {
-        this.nume = nume;
+        this.titlu = nume;
         this.descriere = descriere;
     }
 
@@ -42,12 +42,12 @@ public class Materie {
 //        this.listaResurse = listaResurse;
 //    }
 
-    public String getNume() {
-        return nume;
+    public String getTitlu() {
+        return titlu;
     }
 
     public void setNume(String nume) {
-        this.nume = nume;
+        this.titlu = nume;
     }
 
     public String getDescriere() {

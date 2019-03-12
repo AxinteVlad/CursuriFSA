@@ -12,22 +12,26 @@ import android.widget.ProgressBar;
 import com.axintevlad.cursurifsa.R;
 import com.axintevlad.cursurifsa.adapters.MaterieAdapter;
 import com.axintevlad.cursurifsa.models.Materie;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class YearOneActivity extends NavDrawerActivity {
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private CollectionReference materiiRef = db.collection("an1");
+    private MaterieAdapter adapter;
 
-    private RecyclerView recyclerView;
-    private RecyclerView.Adapter adapter;
     private ProgressBar progressBar;
 
     private List<Materie> materieList;
-    private FirebaseFirestore db;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,38 +40,8 @@ public class YearOneActivity extends NavDrawerActivity {
 
         FloatingActionButton fab = findViewById(R.id.fab);
         progressBar = findViewById(R.id.progressbar);
-        recyclerView = findViewById(R.id.yearOne_recylcleView);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        materieList = new ArrayList<>();
-//        for(int i = 0;i<10;i++){
-//            Materie materie = new Materie("nume" + i+1,"Lore dummy data");
-//            materieList.add(materie);
-//        }
-        adapter = new MaterieAdapter(materieList,this);
-
-        recyclerView.setAdapter(adapter);
-
-        db = FirebaseFirestore.getInstance();
-
-        db.collection("an1").get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        progressBar.setVisibility(View.GONE);
-
-                        if(!queryDocumentSnapshots.isEmpty()){
-                            List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
-
-                            for(DocumentSnapshot d: list){
-                                Materie materie = d.toObject(Materie.class);
-                                materieList.add(materie);
-                            }
-                            adapter.notifyDataSetChanged();
-                        }
-                    }
-                });
+        setUpRecyclerView();
 
         //fab button
         fab.setOnClickListener(new View.OnClickListener() {
@@ -82,8 +56,33 @@ public class YearOneActivity extends NavDrawerActivity {
 
     }
 
+    private void setUpRecyclerView() {
+
+        Query query = materiiRef.orderBy("titlu",Query.Direction.DESCENDING);
+        FirestoreRecyclerOptions<Materie> options = new FirestoreRecyclerOptions.Builder<Materie>()
+                .setQuery(query,Materie.class)
+                .build();
+
+        adapter = new MaterieAdapter(options);
+        progressBar.setVisibility(View.GONE);
+        RecyclerView recyclerView = findViewById(R.id.yearOne_recylcleView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
+    }
     @Override
     protected int getNavigationItemID() {
         return 0;
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        adapter.startListening();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        adapter.stopListening();
     }
 }

@@ -18,18 +18,20 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Objects;
+
 public class SaveMaterieActivity extends AppCompatActivity {
 
     private EditText editTextNume,editTextDescriere;
 
-    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_save_materie);
 
-        db = FirebaseFirestore.getInstance();
+
+        setTitle("Adauga Materie");
 
         editTextNume = findViewById(R.id.edittext_nume);
         editTextDescriere = findViewById(R.id.edittext_descriere);
@@ -37,64 +39,26 @@ public class SaveMaterieActivity extends AppCompatActivity {
         findViewById(R.id.button_save).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String nume = editTextNume.getText().toString().trim();
-                String descriere = editTextDescriere.getText().toString().trim();
+                saveMaterie();
 
-                if(!validateInputs(nume,descriere)){
-                    CollectionReference dbMaterii = db.collection("an1");
-
-                    Materie materie = new Materie(nume,descriere);
-
-                    dbMaterii.add(materie)
-                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                @Override
-                                public void onSuccess(DocumentReference documentReference) {
-                                    String docID = documentReference.getId();
-                                    String denumire,link;
-                                    denumire = "";
-                                    link ="";
-                                    Curs curs = new Curs(denumire,link);
-                                    CollectionReference dbMaterii = db.collection("an1");
-                                    dbMaterii.document(docID).collection("cursuri").add(curs);
-
-                                    Toast.makeText(SaveMaterieActivity.this, "Materie adaugata!", Toast.LENGTH_LONG).show();
-                                    Intent intent = new Intent(SaveMaterieActivity.this, YearOneActivity.class);
-                                    startActivity(intent);
-                                    finish();
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(SaveMaterieActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-                                }
-                            });
-
-
-
-
-
-
-
-                }
             }
         });
 
     }
-    private boolean validateInputs(String nume, String descriere) {
-        if (nume.isEmpty()) {
-            editTextNume.setError("Name required");
-            editTextNume.requestFocus();
-            return true;
+    private void saveMaterie() {
+        String title = editTextNume.getText().toString();
+        String description = editTextDescriere.getText().toString();
+
+
+        if (title.trim().isEmpty() || description.trim().isEmpty()) {
+            Toast.makeText(this, "Introduceti un titlu si o descriere", Toast.LENGTH_SHORT).show();
+            return;
         }
 
-        if (descriere.isEmpty()) {
-            editTextDescriere.setError("Brand required");
-            editTextDescriere.requestFocus();
-            return true;
-        }
-
-
-        return false;
+        CollectionReference notebookRef = FirebaseFirestore.getInstance()
+                .collection("an1");
+        notebookRef.add(new Materie(title, description));
+        Toast.makeText(this, "Materie adaugata", Toast.LENGTH_SHORT).show();
+        finish();
     }
 }
