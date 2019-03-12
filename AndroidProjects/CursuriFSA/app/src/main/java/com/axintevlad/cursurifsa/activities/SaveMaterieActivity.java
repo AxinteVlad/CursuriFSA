@@ -30,7 +30,7 @@ public class SaveMaterieActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_save_materie);
 
-
+        
         setTitle("Adauga Materie");
 
         editTextNume = findViewById(R.id.edittext_nume);

@@ -2,25 +2,23 @@ package com.axintevlad.cursurifsa.activities;
 
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.axintevlad.cursurifsa.R;
+import com.axintevlad.cursurifsa.adapters.CursAdapter;
 import com.axintevlad.cursurifsa.adapters.MaterieAdapter;
 import com.axintevlad.cursurifsa.models.Materie;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class YearOneActivity extends NavDrawerActivity {
@@ -69,6 +67,21 @@ public class YearOneActivity extends NavDrawerActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
+
+        adapter.setOnItemClickListener(new MaterieAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
+                Materie materie = documentSnapshot.toObject(Materie.class);
+                String id = documentSnapshot.getId();
+                String path = documentSnapshot.getReference().getPath();
+                Toast.makeText(YearOneActivity.this,
+                        "Position: " + position + " ID: " + id + "path: "+ path, Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(YearOneActivity.this, BottomNavActivity.class);
+                intent.putExtra("ID",id);
+                startActivity(intent);
+            }
+        });
     }
     @Override
     protected int getNavigationItemID() {
