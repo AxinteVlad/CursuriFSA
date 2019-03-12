@@ -8,34 +8,39 @@ import java.util.ArrayList;
 public class Materie {
     private String nume;
     private String descriere;
-    private ArrayList<Cursuri> listaCursuri;
-    private ArrayList<Teme> listaTeme;
-    private ArrayList<Resurse> listaResurse;
+//    private ArrayList<Curs> listaCurs;
+//    private ArrayList<Teme> listaTeme;
+//    private ArrayList<Resurse> listaResurse;
 
-
-    public ArrayList<Cursuri> getListaCursuri() {
-        return listaCursuri;
+    public Materie() { }
+    public Materie(String nume, String descriere) {
+        this.nume = nume;
+        this.descriere = descriere;
     }
 
-    public void setListaCursuri(ArrayList<Cursuri> listaCursuri) {
-        this.listaCursuri = listaCursuri;
-    }
-
-    public ArrayList<Teme> getListaTeme() {
-        return listaTeme;
-    }
-
-    public void setListaTeme(ArrayList<Teme> listaTeme) {
-        this.listaTeme = listaTeme;
-    }
-
-    public ArrayList<Resurse> getListaResurse() {
-        return listaResurse;
-    }
-
-    public void setListaResurse(ArrayList<Resurse> listaResurse) {
-        this.listaResurse = listaResurse;
-    }
+//    public ArrayList<Curs> getListaCurs() {
+//        return listaCurs;
+//    }
+//
+//    public void setListaCurs(ArrayList<Curs> listaCurs) {
+//        this.listaCurs = listaCurs;
+//    }
+//
+//    public ArrayList<Teme> getListaTeme() {
+//        return listaTeme;
+//    }
+//
+//    public void setListaTeme(ArrayList<Teme> listaTeme) {
+//        this.listaTeme = listaTeme;
+//    }
+//
+//    public ArrayList<Resurse> getListaResurse() {
+//        return listaResurse;
+//    }
+//
+//    public void setListaResurse(ArrayList<Resurse> listaResurse) {
+//        this.listaResurse = listaResurse;
+//    }
 
     public String getNume() {
         return nume;

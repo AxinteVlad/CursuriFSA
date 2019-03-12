@@ -1,5 +1,6 @@
 package com.axintevlad.cursurifsa.activities;
 
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -68,17 +69,21 @@ public class YearOneActivity extends NavDrawerActivity {
                     }
                 });
 
-
+        //fab button
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //start activity or fragment
+                Intent intent = new Intent(YearOneActivity.this, SaveMaterieActivity.class);
+                startActivity(intent);
             }
         });
+
+
     }
 
     @Override
     protected int getNavigationItemID() {
-        return R.id.yearOne_recylcleView;
+        return 0;
     }
 }

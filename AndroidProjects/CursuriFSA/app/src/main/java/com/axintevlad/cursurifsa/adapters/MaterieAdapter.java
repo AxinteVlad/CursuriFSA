@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.axintevlad.cursurifsa.R;
 import com.axintevlad.cursurifsa.models.Materie;
+import com.google.firebase.firestore.DocumentSnapshot;
+
 import java.util.List;
 
 /**
@@ -18,6 +20,8 @@ public class MaterieAdapter  extends RecyclerView.Adapter<MaterieAdapter.ViewHol
 
     private List<Materie> materieList;
     private Context context;
+    private OnItemClickListener listener;
+
 
     public MaterieAdapter(List<Materie> materieList, Context context) {
         this.materieList = materieList;
@@ -53,9 +57,28 @@ public class MaterieAdapter  extends RecyclerView.Adapter<MaterieAdapter.ViewHol
             super(itemView);
             textViewTitlu = itemView.findViewById(R.id.text_titlu);
             textViewDescriere = itemView.findViewById(R.id.text_descriere);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+                    if(position != RecyclerView.NO_POSITION && listener != null){
+
+                    }
+
+                }
+            });
         }
     }
 
     private List<Materie> mList;
 
+    public interface OnItemClickListener{
+        void onItemClick(DocumentSnapshot documentSnapshot,int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener){
+        this.listener =listener;
+
+    }
 }
