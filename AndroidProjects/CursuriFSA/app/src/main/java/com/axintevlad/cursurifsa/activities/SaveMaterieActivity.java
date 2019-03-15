@@ -55,8 +55,10 @@ public class SaveMaterieActivity extends AppCompatActivity {
             return;
         }
 
+        Intent intentExtra = getIntent();
+        String an = intentExtra.getStringExtra("an");
         CollectionReference notebookRef = FirebaseFirestore.getInstance()
-                .collection("an1");
+                .collection(an);
         notebookRef.add(new Materie(title, description));
         Toast.makeText(this, "Materie adaugata", Toast.LENGTH_SHORT).show();
         finish();

@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="10dp"
-    tools:context=".activities.YearOneActivity">
+    tools:context=".activities.MaterieActivity">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/yearOne_recylcleView"
+        android:id="@+id/materie_recylcleView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </android.support.v7.widget.RecyclerView>

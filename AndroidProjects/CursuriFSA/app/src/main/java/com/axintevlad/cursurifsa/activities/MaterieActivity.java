@@ -10,7 +10,6 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.axintevlad.cursurifsa.R;
-import com.axintevlad.cursurifsa.adapters.CursAdapter;
 import com.axintevlad.cursurifsa.adapters.MaterieAdapter;
 import com.axintevlad.cursurifsa.models.Materie;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -21,9 +20,9 @@ import com.google.firebase.firestore.Query;
 
 import java.util.List;
 
-public class YearOneActivity extends NavDrawerActivity {
+public class MaterieActivity extends NavDrawerActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference materiiRef = db.collection("an1");
+    private CollectionReference materiiRef;
     private MaterieAdapter adapter;
 
     private ProgressBar progressBar;
@@ -34,19 +33,25 @@ public class YearOneActivity extends NavDrawerActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_year_one);
+        setContentView(R.layout.activity_materie);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         progressBar = findViewById(R.id.progressbar);
 
+        Intent intent = getIntent();
+        String an = intent.getStringExtra("an");
+        materiiRef = db.collection(an);
         setUpRecyclerView();
 
         //fab button
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //start activity or fragment
-                Intent intent = new Intent(YearOneActivity.this, SaveMaterieActivity.class);
+                //start activity
+                Intent intentExtra = getIntent();
+                String an = intentExtra.getStringExtra("an");
+                Intent intent = new Intent(MaterieActivity.this, SaveMaterieActivity.class);
+                intent.putExtra("an",an);
                 startActivity(intent);
             }
         });
@@ -63,7 +68,7 @@ public class YearOneActivity extends NavDrawerActivity {
 
         adapter = new MaterieAdapter(options);
         progressBar.setVisibility(View.GONE);
-        RecyclerView recyclerView = findViewById(R.id.yearOne_recylcleView);
+        RecyclerView recyclerView = findViewById(R.id.materie_recylcleView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
@@ -74,11 +79,15 @@ public class YearOneActivity extends NavDrawerActivity {
                 Materie materie = documentSnapshot.toObject(Materie.class);
                 String id = documentSnapshot.getId();
                 String path = documentSnapshot.getReference().getPath();
-                Toast.makeText(YearOneActivity.this,
+                Toast.makeText(MaterieActivity.this,
                         "Position: " + position + " ID: " + id + "path: "+ path, Toast.LENGTH_SHORT).show();
 
-                Intent intent = new Intent(YearOneActivity.this, BottomNavActivity.class);
+                Intent intentExtra = getIntent();
+                String an = intentExtra.getStringExtra("an");
+
+                Intent intent = new Intent(MaterieActivity.this, BottomNavActivity.class);
                 intent.putExtra("ID",id);
+                intent.putExtra("an",an);
                 startActivity(intent);
             }
         });

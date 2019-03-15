@@ -1,17 +1,15 @@
 package com.axintevlad.cursurifsa.activities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.axintevlad.cursurifsa.MainActivity;
 import com.axintevlad.cursurifsa.R;
-import com.google.common.reflect.ClassPath;
 
 public class AnActivity extends NavDrawerActivity {
     private ImageView oneIc,twoIc,threeIc,fourIc;
+    private String an;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +25,24 @@ public class AnActivity extends NavDrawerActivity {
                 chActivToYearOne();
             }
         });
+        twoIc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chActivToYearTwo();
+            }
+        });
+        threeIc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chActivToYearThree();
+            }
+        });
+        fourIc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chActivToYearFour();
+            }
+        });
     }
 
     @Override
@@ -36,25 +52,33 @@ public class AnActivity extends NavDrawerActivity {
 
     private void chActivToYearOne(){
         //trece la mainactivity
-        Intent intent = new Intent(AnActivity.this, YearOneActivity.class);
+        an = "an1";
+        Intent intent = new Intent(AnActivity.this, MaterieActivity.class);
+        intent.putExtra("an",an);
         startActivity(intent);
 
     }
     private void chActivToYearTwo(){
         //trece la mainactivity
-        Intent intent = new Intent(AnActivity.this, YearOneActivity.class);
+        an = "an2";
+        Intent intent = new Intent(AnActivity.this, MaterieActivity.class);
+        intent.putExtra("an",an);
         startActivity(intent);
 
     }
     private void chActivToYearThree(){
         //trece la mainactivity
-        Intent intent = new Intent(AnActivity.this, YearOneActivity.class);
+        an = "an3";
+        Intent intent = new Intent(AnActivity.this, MaterieActivity.class);
+        intent.putExtra("an",an);
         startActivity(intent);
 
     }
     private void chActivToYearFour(){
         //trece la mainactivity
-        Intent intent = new Intent(AnActivity.this, YearOneActivity.class);
+        an = "an3";
+        Intent intent = new Intent(AnActivity.this, MaterieActivity.class);
+        intent.putExtra("an",an);
         startActivity(intent);
 
     }

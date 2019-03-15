@@ -15,7 +15,7 @@ import com.axintevlad.cursurifsa.fragment.CursuriFragment;
 import com.axintevlad.cursurifsa.fragment.ResurseFragment;
 import com.axintevlad.cursurifsa.fragment.TemeFragment;
 
-public class BottomNavActivity extends AppCompatActivity {
+public class BottomNavActivity extends NavDrawerActivity {
 
     private BottomNavigationView bottomNavigationView;
     private FrameLayout frameLayout;
@@ -28,11 +28,16 @@ public class BottomNavActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bottom_nav);
-        Intent intent = getIntent();
-        String id = intent.getStringExtra("ID");
-        Bundle bundle = new Bundle();
-        bundle.putString("ID",id);
 
+        //receive an and id
+        Intent intent = getIntent();
+        String an = intent.getStringExtra("an");
+        String id = intent.getStringExtra("ID");
+
+        //send to fragment
+        Bundle bundle = new Bundle();
+        bundle.putString("an",an);
+        bundle.putString("ID",id);
 
         bottomNavigationView = findViewById(R.id.bottomnav_main);
         frameLayout = findViewById(R.id.frame_main);
@@ -72,6 +77,11 @@ public class BottomNavActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected int getNavigationItemID() {
+        return 0;
     }
 
     public void setFragment(Fragment fragment) {
