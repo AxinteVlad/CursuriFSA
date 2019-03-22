@@ -51,8 +51,25 @@ public class BottomNavActivity extends NavDrawerActivity {
         cursuriFragment.setArguments(bundle);
         temeFragment.setArguments(bundle);
         resurseFragment.setArguments(bundle);
-
         setFragment(cursuriFragment);
+
+
+        //coming from saveActivity
+        int i = intent.getIntExtra("NR_FRAGMENT",-1);
+        switch (i){
+            case 0: {
+                bottomNavigationView.getMenu().getItem(0).setChecked(true);
+            }
+            case 1:{
+                bottomNavigationView.getMenu().getItem(1).setChecked(true);
+            }
+            case 2:{
+                bottomNavigationView.getMenu().getItem(2).setChecked(true);
+            }
+            default:
+                bottomNavigationView.getMenu().getItem(0).setChecked(true);
+        }
+
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

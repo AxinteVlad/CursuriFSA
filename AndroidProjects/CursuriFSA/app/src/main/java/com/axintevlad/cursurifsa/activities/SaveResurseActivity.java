@@ -7,8 +7,6 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,15 +18,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.axintevlad.cursurifsa.CursuriFsaApplication;
 import com.axintevlad.cursurifsa.R;
-import com.axintevlad.cursurifsa.fragment.CursuriFragment;
 import com.axintevlad.cursurifsa.models.Curs;
-import com.axintevlad.cursurifsa.models.Materie;
 import com.axintevlad.cursurifsa.models.Resurse;
-import com.axintevlad.cursurifsa.models.Teme;
-import com.google.android.gms.tasks.Continuation;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -39,7 +31,8 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-public class SaveCursActivity extends AppCompatActivity {
+public class SaveResurseActivity extends AppCompatActivity {
+
     private static final String TAG = "SaveCursActivity";
     private final static int PICK_PDF_CODE = 9;
     private final static int SELECT_PDF_CODE = 86;
@@ -59,18 +52,18 @@ public class SaveCursActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_save_curs);
+        setContentView(R.layout.activity_save_resurse);
 
         storage = FirebaseStorage.getInstance();
         db = FirebaseFirestore.getInstance();
 
-        editTextNume = findViewById(R.id.edittext_nume_curs);
-        editTextLink = findViewById(R.id.edittext_link_curs);
-        alegeFisier = findViewById(R.id.button_alegeFisier);
-        incarcaFisier = findViewById(R.id.button_incarcaFisier);
-        saveMaterie = findViewById(R.id.button_save_curs);
-        progressBar = findViewById(R.id.progressbar_curs);
-        textViewStatus = findViewById(R.id.textViewStatus);
+        editTextNume = findViewById(R.id.edittext_nume_resursa);
+        editTextLink = findViewById(R.id.edittext_link_resursa);
+        alegeFisier = findViewById(R.id.button_alegeFisier_resursa);
+        incarcaFisier = findViewById(R.id.button_incarcaFisier_resursa);
+        saveMaterie = findViewById(R.id.button_save_resursa);
+        progressBar = findViewById(R.id.progressbar_resursa);
+        textViewStatus = findViewById(R.id.textViewStatus_resursa);
 
 
         Intent intentExtra = getIntent();
@@ -84,8 +77,8 @@ public class SaveCursActivity extends AppCompatActivity {
         saveMaterie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                saveMaterie();
-                Intent intent = new Intent(SaveCursActivity.this, BottomNavActivity.class);
+                saveResursa();
+                Intent intent = new Intent(SaveResurseActivity.this, BottomNavActivity.class);
                 intent.putExtra("an",an);
                 intent.putExtra("ID",id);
                 startActivity(intent);
@@ -96,10 +89,10 @@ public class SaveCursActivity extends AppCompatActivity {
         alegeFisier.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(ContextCompat.checkSelfPermission(SaveCursActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
+                if(ContextCompat.checkSelfPermission(SaveResurseActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
                     selectPdf();
                 }else{
-                    ActivityCompat.requestPermissions(SaveCursActivity.this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},PICK_PDF_CODE);
+                    ActivityCompat.requestPermissions(SaveResurseActivity.this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},PICK_PDF_CODE);
                 }
             }
         });
@@ -110,7 +103,7 @@ public class SaveCursActivity extends AppCompatActivity {
                 if(pdfUri!=null){
                     salveazaPdf(pdfUri);
                 }else{
-                    Toast.makeText(SaveCursActivity.this,"Selecteaza un fisier!",Toast.LENGTH_LONG).show();
+                    Toast.makeText(SaveResurseActivity.this,"Selecteaza un fisier!",Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -120,7 +113,7 @@ public class SaveCursActivity extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
 
         final StorageReference storageReference = storage.getReference();
-        storageReference.child("Cursuri").child(id).putFile(pdfUri)
+        storageReference.child("Resurse").child(id).putFile(pdfUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -132,15 +125,15 @@ public class SaveCursActivity extends AppCompatActivity {
 
                         progressBar.setVisibility(View.GONE);
                         textViewStatus.setText("Fisierul a fost uploadat!");
-                       Toast.makeText(SaveCursActivity.this,"Fisier Uploadat!",Toast.LENGTH_LONG).show();
+                        Toast.makeText(SaveResurseActivity.this,"Fisier Uploadat!",Toast.LENGTH_LONG).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(SaveCursActivity.this,"NU S-A PUTUT UPLOADA",Toast.LENGTH_LONG).show();
-            }
-        })
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(SaveResurseActivity.this,"NU S-A PUTUT UPLOADA",Toast.LENGTH_LONG).show();
+                    }
+                })
                 .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
@@ -161,7 +154,7 @@ public class SaveCursActivity extends AppCompatActivity {
             selectPdf();
         }else
         {
-            Toast.makeText(SaveCursActivity.this,"Acorda permisiunea",Toast.LENGTH_LONG).show();
+            Toast.makeText(SaveResurseActivity.this,"Acorda permisiunea",Toast.LENGTH_LONG).show();
         }
     }
 
@@ -179,27 +172,27 @@ public class SaveCursActivity extends AppCompatActivity {
         if(requestCode == SELECT_PDF_CODE && resultCode == RESULT_OK && data!=null){
             pdfUri = data.getData();
         }else{
-            Toast.makeText(SaveCursActivity.this,"Alege un fisier!",Toast.LENGTH_LONG).show();
+            Toast.makeText(SaveResurseActivity.this,"Alege un fisier!",Toast.LENGTH_LONG).show();
         }
     }
 
-    private void saveMaterie() {
+    private void saveResursa() {
         String title = editTextNume.getText().toString();
         String link = editTextLink.getText().toString();
 
 
         if (title.trim().isEmpty() || link.trim().isEmpty()) {
-            Toast.makeText(this, "Introduceti un titlu si o descriere", Toast.LENGTH_SHORT).show();
-            return;
+            Toast.makeText(this, "Introduceti un titlu si un link", Toast.LENGTH_SHORT).show();
+
         }
 
 
         CollectionReference collectionReference = FirebaseFirestore.getInstance()
-                .collection(an).document(id).collection("cursuri");
-        collectionReference.add(new Curs(title, link));
-        Toast.makeText(this, "Curs adaugat", Toast.LENGTH_SHORT).show();
+                .collection(an).document(id).collection("resurse");
+        collectionReference.add(new Resurse(title, link));
+        Toast.makeText(this, "Resursa adaugata!", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(SaveResurseActivity.this,BottomNavActivity.class);
+        intent.putExtra("NR_FRAGMENT",2);
         finish();
     }
-
-
 }

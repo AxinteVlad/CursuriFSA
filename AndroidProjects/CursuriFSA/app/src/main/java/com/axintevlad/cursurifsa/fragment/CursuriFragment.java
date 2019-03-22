@@ -16,13 +16,9 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.axintevlad.cursurifsa.R;
-import com.axintevlad.cursurifsa.activities.BottomNavActivity;
-import com.axintevlad.cursurifsa.activities.MaterieActivity;
 import com.axintevlad.cursurifsa.activities.SaveCursActivity;
 import com.axintevlad.cursurifsa.adapters.CursAdapter;
-import com.axintevlad.cursurifsa.adapters.MaterieAdapter;
 import com.axintevlad.cursurifsa.models.Curs;
-import com.axintevlad.cursurifsa.models.Materie;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -81,7 +77,7 @@ public class CursuriFragment extends Fragment {
         });
 
         CollectionReference cursuriRef = db.collection(an).document(id).collection("cursuri");
-        Query query = cursuriRef.orderBy("denumire",Query.Direction.DESCENDING);
+        Query query = cursuriRef.orderBy("denumire",Query.Direction.ASCENDING);
         FirestoreRecyclerOptions<Curs> options = new FirestoreRecyclerOptions.Builder<Curs>()
                 .setQuery(query,Curs.class)
                 .build();

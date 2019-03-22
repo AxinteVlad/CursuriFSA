@@ -9,44 +9,45 @@ import android.widget.TextView;
 
 import com.axintevlad.cursurifsa.R;
 import com.axintevlad.cursurifsa.models.Curs;
+import com.axintevlad.cursurifsa.models.Resurse;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 /**
- * Created by vlad__000 on 12.03.2019.
+ * Created by vlad__000 on 22.03.2019.
  */
-public class CursAdapter extends FirestoreRecyclerAdapter<Curs, CursAdapter.CursHolder> {
-    private OnItemClickListener listener;
+public class ResurseAdapter extends FirestoreRecyclerAdapter<Resurse,ResurseAdapter.ResurseHolder> {
+    private ResurseAdapter.OnItemClickListener listener;
 
-    public CursAdapter(FirestoreRecyclerOptions<Curs> options){
+    public ResurseAdapter(FirestoreRecyclerOptions<Resurse> options){
         super(options);
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull CursHolder holder, int position, @NonNull Curs model) {
+    protected void onBindViewHolder(@NonNull ResurseAdapter.ResurseHolder holder, int position, @NonNull Resurse model) {
         holder.textViewTitlu.setText(model.getDenumire());
         holder.textViewLink.setText(model.getLink());
     }
 
     @NonNull
     @Override
-    public CursHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_curs,
+    public ResurseAdapter.ResurseHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_resurse,
                 parent, false);
-        return new CursHolder(v);
+        return new ResurseAdapter.ResurseHolder(v);
     }
 
 
-    class CursHolder extends RecyclerView.ViewHolder {
+    class ResurseHolder extends RecyclerView.ViewHolder {
         TextView textViewTitlu;
         TextView textViewLink;
 
 
-        public CursHolder(View itemView) {
+        public ResurseHolder(View itemView) {
             super(itemView);
-            textViewTitlu = itemView.findViewById(R.id.curs_titlu);
-            textViewLink = itemView.findViewById(R.id.curs_link);
+            textViewTitlu = itemView.findViewById(R.id.resurse_titlu);
+            textViewLink = itemView.findViewById(R.id.resurse_link);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -60,7 +61,7 @@ public class CursAdapter extends FirestoreRecyclerAdapter<Curs, CursAdapter.Curs
         void onItemClick(DocumentSnapshot documentSnapshot, int position);
     }
 
-    public void setOnItemClickListener(OnItemClickListener listener){
+    public void setOnItemClickListener(ResurseAdapter.OnItemClickListener listener){
         this.listener =listener;
     }
 }

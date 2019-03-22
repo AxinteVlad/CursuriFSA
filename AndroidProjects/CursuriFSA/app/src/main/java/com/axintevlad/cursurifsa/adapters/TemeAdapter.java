@@ -9,44 +9,45 @@ import android.widget.TextView;
 
 import com.axintevlad.cursurifsa.R;
 import com.axintevlad.cursurifsa.models.Curs;
+import com.axintevlad.cursurifsa.models.Teme;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 /**
- * Created by vlad__000 on 12.03.2019.
+ * Created by vlad__000 on 22.03.2019.
  */
-public class CursAdapter extends FirestoreRecyclerAdapter<Curs, CursAdapter.CursHolder> {
+public class TemeAdapter extends FirestoreRecyclerAdapter<Teme, TemeAdapter.TemeHolder> {
     private OnItemClickListener listener;
 
-    public CursAdapter(FirestoreRecyclerOptions<Curs> options){
+    public TemeAdapter(FirestoreRecyclerOptions<Teme> options){
         super(options);
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull CursHolder holder, int position, @NonNull Curs model) {
+    protected void onBindViewHolder(@NonNull TemeAdapter.TemeHolder holder, int position, @NonNull Teme model) {
         holder.textViewTitlu.setText(model.getDenumire());
         holder.textViewLink.setText(model.getLink());
     }
 
     @NonNull
     @Override
-    public CursHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_curs,
+    public TemeAdapter.TemeHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_teme,
                 parent, false);
-        return new CursHolder(v);
+        return new TemeHolder(v);
     }
 
 
-    class CursHolder extends RecyclerView.ViewHolder {
+    class TemeHolder extends RecyclerView.ViewHolder {
         TextView textViewTitlu;
         TextView textViewLink;
 
 
-        public CursHolder(View itemView) {
+        public TemeHolder(View itemView) {
             super(itemView);
-            textViewTitlu = itemView.findViewById(R.id.curs_titlu);
-            textViewLink = itemView.findViewById(R.id.curs_link);
+            textViewTitlu = itemView.findViewById(R.id.teme_titlu);
+            textViewLink = itemView.findViewById(R.id.teme_link);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -60,7 +61,7 @@ public class CursAdapter extends FirestoreRecyclerAdapter<Curs, CursAdapter.Curs
         void onItemClick(DocumentSnapshot documentSnapshot, int position);
     }
 
-    public void setOnItemClickListener(OnItemClickListener listener){
+    public void setOnItemClickListener(TemeAdapter.OnItemClickListener listener){
         this.listener =listener;
     }
 }

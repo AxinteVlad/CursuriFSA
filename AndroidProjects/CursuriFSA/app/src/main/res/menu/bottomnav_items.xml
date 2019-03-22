@@ -5,13 +5,16 @@
     <item
         android:id="@+id/bottomNav_cursuri"
         android:icon="@drawable/ic_cursuri"
-        android:title="@string/cursuri" />
+        android:title="@string/cursuri"
+        android:enabled="true"/>
     <item
         android:id="@+id/bottomNav_teme"
         android:icon="@drawable/ic_teme"
-        android:title="@string/teme" />
+        android:title="@string/teme"
+        android:enabled="true"/>
     <item
         android:id="@+id/bottomNav_resurse"
         android:icon="@drawable/ic_id_resurse"
-        android:title="@string/resurse" />
+        android:title="@string/resurse"
+        android:enabled="true"/>
 </menu>
