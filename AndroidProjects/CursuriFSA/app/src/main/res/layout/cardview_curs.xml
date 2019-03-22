@@ -44,6 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="3dp"
                 android:text="Descriere"
+                android:maxLines="1"
                 />
         </LinearLayout>
     </LinearLayout>

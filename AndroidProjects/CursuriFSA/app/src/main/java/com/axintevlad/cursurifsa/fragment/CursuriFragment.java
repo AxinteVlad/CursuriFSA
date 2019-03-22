@@ -2,6 +2,7 @@ package com.axintevlad.cursurifsa.fragment;
 
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,11 +13,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.axintevlad.cursurifsa.R;
+import com.axintevlad.cursurifsa.activities.BottomNavActivity;
+import com.axintevlad.cursurifsa.activities.MaterieActivity;
 import com.axintevlad.cursurifsa.activities.SaveCursActivity;
 import com.axintevlad.cursurifsa.adapters.CursAdapter;
+import com.axintevlad.cursurifsa.adapters.MaterieAdapter;
 import com.axintevlad.cursurifsa.models.Curs;
+import com.axintevlad.cursurifsa.models.Materie;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -86,6 +92,21 @@ public class CursuriFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
+        adapter.setOnItemClickListener(new CursAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
+                Curs curs = documentSnapshot.toObject(Curs.class);
+                String id = documentSnapshot.getId();
+                String path = documentSnapshot.getReference().getPath();
+                Toast.makeText(getActivity(), "Link "+ curs.getLink(), Toast.LENGTH_SHORT).show();
+
+                Uri linkUri = Uri.parse(curs.getLink());
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.setDataAndType(linkUri,"application/pdf");
+                startActivity(intent);
+            }
+        });
 
 
         // Inflate the layout for this fragment

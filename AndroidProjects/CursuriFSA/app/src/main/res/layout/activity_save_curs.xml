@@ -39,8 +39,18 @@
             android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
             android:hint="Link"
+            android:maxLines="1"
             android:padding="10dp" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="SAU"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="24dp"
+            android:layout_margin="16dp"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -60,6 +70,22 @@
                 android:text="Incarca fisier"/>
         </LinearLayout>
 
+        <ProgressBar
+            android:id="@+id/progressbar_curs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:visibility="invisible"
+            android:layout_marginTop="16dp"
+            />
+        <TextView
+            android:id="@+id/textViewStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="16dp"
+            android:textColor="@color/buttonNormal"/>
+
         <Button
             android:id="@+id/button_save_curs"
             android:layout_width="match_parent"
@@ -71,7 +97,9 @@
             android:textColor="@color/white" />
 
 
+
     </LinearLayout>
+
 
 
 </RelativeLayout>
