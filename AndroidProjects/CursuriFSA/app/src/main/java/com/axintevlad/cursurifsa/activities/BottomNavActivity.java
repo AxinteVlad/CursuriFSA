@@ -23,6 +23,7 @@ public class BottomNavActivity extends NavDrawerActivity {
     private CursuriFragment cursuriFragment;
     private TemeFragment temeFragment;
     private ResurseFragment resurseFragment;
+    private String an,id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +32,9 @@ public class BottomNavActivity extends NavDrawerActivity {
 
         //receive an and id
         Intent intent = getIntent();
-        String an = intent.getStringExtra("an");
-        String id = intent.getStringExtra("ID");
+        an = intent.getStringExtra("an");
+        id = intent.getStringExtra("ID");
+
 
         //send to fragment
         Bundle bundle = new Bundle();

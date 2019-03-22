@@ -1,6 +1,7 @@
 package com.axintevlad.cursurifsa.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,10 +14,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.axintevlad.cursurifsa.R;
+import com.axintevlad.cursurifsa.activities.SaveCursActivity;
 import com.axintevlad.cursurifsa.adapters.CursAdapter;
 import com.axintevlad.cursurifsa.models.Curs;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
@@ -26,6 +29,7 @@ import com.google.firebase.firestore.Query;
 public class CursuriFragment extends Fragment {
     private String id,an;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private DocumentSnapshot documentSnapshot;
 
     private CursAdapter adapter;
     FloatingActionButton fab;
@@ -44,6 +48,7 @@ public class CursuriFragment extends Fragment {
             id = bundle.getString("ID", null);
         }
 
+
     }
 
     @Override
@@ -57,7 +62,15 @@ public class CursuriFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 //cand dai click pe fab din cursuri
+             //   de sters bundle
+//                Bundle data = new Bundle();
+//                data.putString("an",an);
+//                data.putString("ID",id);
 
+                Intent intent = new Intent(getActivity(), SaveCursActivity.class);
+                intent.putExtra("an",an);
+                intent.putExtra("ID",id);
+                startActivity(intent);
             }
         });
 
