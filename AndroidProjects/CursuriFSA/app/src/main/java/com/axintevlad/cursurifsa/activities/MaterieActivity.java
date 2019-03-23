@@ -1,31 +1,36 @@
 package com.axintevlad.cursurifsa.activities;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
+import com.axintevlad.cursurifsa.CursuriFsaApplication;
 import com.axintevlad.cursurifsa.R;
 import com.axintevlad.cursurifsa.adapters.MaterieAdapter;
 import com.axintevlad.cursurifsa.models.Materie;
+import com.axintevlad.cursurifsa.models.User;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class YearOneActivity extends NavDrawerActivity {
+public class MaterieActivity extends NavDrawerActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference materiiRef = db.collection("an1");
+    private CollectionReference materiiRef;
     private MaterieAdapter adapter;
 
     private ProgressBar progressBar;
@@ -36,19 +41,31 @@ public class YearOneActivity extends NavDrawerActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_year_one);
+        setContentView(R.layout.activity_materie);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+        final FloatingActionButton fab = findViewById(R.id.fab);
         progressBar = findViewById(R.id.progressbar);
 
+
+        CursuriFsaApplication.getInstance().checkElev(fab);
+
+        Intent intent = getIntent();
+        String an = intent.getStringExtra("an");
+        materiiRef = db.collection(an);
         setUpRecyclerView();
+
+
+
 
         //fab button
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //start activity or fragment
-                Intent intent = new Intent(YearOneActivity.this, SaveMaterieActivity.class);
+                //start activity
+                Intent intentExtra = getIntent();
+                String an = intentExtra.getStringExtra("an");
+                Intent intent = new Intent(MaterieActivity.this, SaveMaterieActivity.class);
+                intent.putExtra("an",an);
                 startActivity(intent);
             }
         });
@@ -65,10 +82,29 @@ public class YearOneActivity extends NavDrawerActivity {
 
         adapter = new MaterieAdapter(options);
         progressBar.setVisibility(View.GONE);
-        RecyclerView recyclerView = findViewById(R.id.yearOne_recylcleView);
+        RecyclerView recyclerView = findViewById(R.id.materie_recylcleView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
+
+        adapter.setOnItemClickListener(new MaterieAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
+                Materie materie = documentSnapshot.toObject(Materie.class);
+                String id = documentSnapshot.getId();
+                String path = documentSnapshot.getReference().getPath();
+                Toast.makeText(MaterieActivity.this,
+                        "Position: " + position + " ID: " + id + "path: "+ path, Toast.LENGTH_SHORT).show();
+
+                Intent intentExtra = getIntent();
+                String an = intentExtra.getStringExtra("an");
+
+                Intent intent = new Intent(MaterieActivity.this, BottomNavActivity.class);
+                intent.putExtra("ID",id);
+                intent.putExtra("an",an);
+                startActivity(intent);
+            }
+        });
     }
     @Override
     protected int getNavigationItemID() {

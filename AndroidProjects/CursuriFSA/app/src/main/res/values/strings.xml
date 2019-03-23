@@ -9,5 +9,11 @@
 
     <string name="nav_open">Open</string>
     <string name="nav_clsed">Closed</string>
+    <string name="resurse">Resurse</string>
+    <string name="teme">Teme</string>
+    <string name="cursuri">Cursuri</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

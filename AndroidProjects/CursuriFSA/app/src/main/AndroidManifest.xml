@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.axintevlad.cursurifsa">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,11 +13,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".activities.SaveMaterieActivity"></activity>
-        <activity android:name=".activities.YearFourActivity" />
-        <activity android:name=".activities.YearThreeActivity" />
-        <activity android:name=".activities.YearTwoActivity" />
-        <activity android:name=".activities.YearOneActivity" />
+        <activity android:name=".activities.SaveResurseActivity"></activity>
+        <activity android:name=".activities.SaveCursActivity" />
+        <activity android:name=".activities.BottomNavActivity" />
+        <activity android:name=".activities.SaveMaterieActivity" />
+        <activity android:name=".activities.MaterieActivity" />
+        <activity android:name=".activities.SaveTemaActivity" />
         <activity android:name=".activities.AnActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,7 +29,7 @@
         <activity android:name=".activities.ProfesorActivity" />
         <activity android:name=".activities.SignUpActivity" />
         <activity android:name=".activities.LoginActivity" />
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>
