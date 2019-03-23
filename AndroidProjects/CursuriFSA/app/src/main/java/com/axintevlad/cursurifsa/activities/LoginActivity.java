@@ -109,7 +109,8 @@ public class LoginActivity extends AppCompatActivity {
                                 if(task.isSuccessful()) {
                                     DocumentSnapshot document = task.getResult();
                                     if (document.exists()) {
-                                        User user = document.toObject(User.class);
+                                        User user = User.getInstance();
+                                        user = document.toObject(User.class);
                                         Log.d(TAG, "DocumentSnapshot data: " + document.getData()+"///////////" + user.getTip());
                                         if(user.getTip().equals(tip_profesor)){
                                             //inchide progress

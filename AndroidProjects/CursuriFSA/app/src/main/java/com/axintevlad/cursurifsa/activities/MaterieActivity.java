@@ -1,18 +1,26 @@
 package com.axintevlad.cursurifsa.activities;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.axintevlad.cursurifsa.CursuriFsaApplication;
 import com.axintevlad.cursurifsa.R;
 import com.axintevlad.cursurifsa.adapters.MaterieAdapter;
 import com.axintevlad.cursurifsa.models.Materie;
+import com.axintevlad.cursurifsa.models.User;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -35,13 +43,19 @@ public class MaterieActivity extends NavDrawerActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_materie);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+        final FloatingActionButton fab = findViewById(R.id.fab);
         progressBar = findViewById(R.id.progressbar);
+
+
+        CursuriFsaApplication.getInstance().checkElev(fab);
 
         Intent intent = getIntent();
         String an = intent.getStringExtra("an");
         materiiRef = db.collection(an);
         setUpRecyclerView();
+
+
+
 
         //fab button
         fab.setOnClickListener(new View.OnClickListener() {

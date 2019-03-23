@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.axintevlad.cursurifsa.CursuriFsaApplication;
 import com.axintevlad.cursurifsa.R;
 import com.axintevlad.cursurifsa.activities.SaveTemaActivity;
 import com.axintevlad.cursurifsa.adapters.CursAdapter;
@@ -63,6 +64,7 @@ public class TemeFragment extends Fragment {
 
         View rootView  = inflater.inflate(R.layout.fragment_teme, container, false);
         fab = (FloatingActionButton) rootView.findViewById(R.id.fab_teme);
+        CursuriFsaApplication.getInstance().checkElev(fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

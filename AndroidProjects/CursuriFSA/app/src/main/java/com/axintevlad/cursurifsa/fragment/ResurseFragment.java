@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.axintevlad.cursurifsa.CursuriFsaApplication;
 import com.axintevlad.cursurifsa.R;
 import com.axintevlad.cursurifsa.activities.SaveCursActivity;
 import com.axintevlad.cursurifsa.activities.SaveResurseActivity;
@@ -64,6 +65,7 @@ public class ResurseFragment extends Fragment {
 
         View rootView  = inflater.inflate(R.layout.fragment_resurse, container, false);
         fab = (FloatingActionButton) rootView.findViewById(R.id.fab_resurse);
+        CursuriFsaApplication.getInstance().checkElev(fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
