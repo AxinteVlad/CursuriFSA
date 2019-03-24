@@ -8,39 +8,19 @@ import java.util.ArrayList;
 public class Materie {
     private String titlu;
     private String descriere;
-//    private ArrayList<Curs> listaCurs;
-//    private ArrayList<Teme> listaTeme;
-//    private ArrayList<Resurse> listaResurse;
+    private String imageUrl;
+
 
     public Materie() { }
     public Materie(String nume, String descriere) {
         this.titlu = nume;
         this.descriere = descriere;
     }
-
-//    public ArrayList<Curs> getListaCurs() {
-//        return listaCurs;
-//    }
-//
-//    public void setListaCurs(ArrayList<Curs> listaCurs) {
-//        this.listaCurs = listaCurs;
-//    }
-//
-//    public ArrayList<Teme> getListaTeme() {
-//        return listaTeme;
-//    }
-//
-//    public void setListaTeme(ArrayList<Teme> listaTeme) {
-//        this.listaTeme = listaTeme;
-//    }
-//
-//    public ArrayList<Resurse> getListaResurse() {
-//        return listaResurse;
-//    }
-//
-//    public void setListaResurse(ArrayList<Resurse> listaResurse) {
-//        this.listaResurse = listaResurse;
-//    }
+    public Materie(String nume, String descriere,String imageUrl) {
+        this.titlu = nume;
+        this.descriere = descriere;
+        this.imageUrl = imageUrl;
+    }
 
     public String getTitlu() {
         return titlu;
@@ -56,5 +36,9 @@ public class Materie {
 
     public void setDescriere(String descriere) {
         this.descriere = descriere;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
     }
 }

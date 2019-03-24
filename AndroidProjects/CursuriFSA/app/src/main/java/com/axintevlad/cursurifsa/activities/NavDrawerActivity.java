@@ -43,7 +43,6 @@ public abstract class NavDrawerActivity extends AppCompatActivity implements Nav
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.activity_nav_drawer);
-
         content_view = findViewById(R.id.content_view);
         navigation_view = findViewById(R.id.navigation_view);
         mDrawerLayout = findViewById(R.id.drawer_layout);
