@@ -6,7 +6,7 @@
         <color name="colorAccent">#ff6f00</color>
         <color name="colorStatusBar">#fff</color>
 
-        <color name="primaryText">#000000</color>
+        <color name="primaryText">#333B48</color>
         <color name="buttonNormal">#e30425</color>
         <color name="buttonHighlight">#ff554f</color>
         <color name="buttonText">#FFFFFF</color>

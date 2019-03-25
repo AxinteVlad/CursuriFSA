@@ -8,6 +8,9 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:statusBarColor">@color/colorStatusBar</item>
         <item name="android:windowLightStatusBar">true</item>
+
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="TextAppearance.AppCompat.Widget.ActionBar.Title." parent="@android:style/TextAppearance">

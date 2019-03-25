@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.axintevlad.cursurifsa.R;
 import com.axintevlad.cursurifsa.models.Materie;
-import com.bumptech.glide.Glide;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.DocumentSnapshot;
