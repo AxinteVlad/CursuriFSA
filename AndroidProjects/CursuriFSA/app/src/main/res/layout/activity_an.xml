@@ -1,64 +1,200 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+    <ImageView
+        android:id="@+id/yearOne"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/background_an1">
+    </ImageView>
 
-    <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="20dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:columnCount="2"
-        android:rowCount="2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:context=".activities.AnActivity">
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="45dp"
+        android:fontFamily="@font/roboto_fonts_family"
+        android:text="Anul I"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        android:textStyle="bold" />
 
-        <ImageView
-            android:id="@+id/ic_one"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_row="0"
-            android:layout_column="0"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="40dp"
-            android:layout_marginBottom="60dp"
-            android:src="@drawable/ic_one" />
+    <TextView
+        android:id="@+id/textview_materii_an1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="193dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="30dp"
+        android:text="0 Materii"
+        android:textColor="@color/white"
+        android:textSize="11dp"
+        android:textStyle="normal" />
 
-        <ImageView
-            android:id="@+id/ic_two"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_row="0"
-            android:layout_column="1"
-            android:src="@drawable/ic_two" />
+    <ImageView
+        android:id="@+id/yearOne_ic"
+        android:layout_width="37dp"
+        android:layout_height="37dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="284dp"
+        android:layout_marginTop="39dp"
+        android:layout_marginEnd="27dp"
+        android:src="@drawable/ic_left_circle" />
 
-        <ImageView
-            android:id="@+id/ic_three"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_row="1"
-            android:layout_column="0"
-            android:layout_marginLeft="10dp"
-            android:src="@drawable/ic_three" />
+    <ImageView
+        android:id="@+id/yearTwo"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:layout_below="@+id/yearOne"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/background_an2"></ImageView>
 
-        <ImageView
-            android:id="@+id/ic_four"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_row="1"
-            android:layout_column="1"
-            android:layout_marginRight="10dp"
-            android:src="@drawable/ic_four" />
-    </GridLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="140dp"
+        android:fontFamily="@font/roboto_fonts_family"
+        android:text="Anul II"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        android:textStyle="bold" />
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/textview_materii_an2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="193dp"
+        android:layout_marginTop="145dp"
+        android:layout_marginBottom="30dp"
+        android:text="0 Materii"
+        android:textColor="@color/white"
+        android:textSize="11dp"
+        android:textStyle="normal" />
+    <ImageView
+        android:id="@+id/yearTwo_ic"
+        android:layout_width="37dp"
+        android:layout_height="37dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="284dp"
+        android:layout_marginTop="134dp"
+        android:layout_marginEnd="27dp"
+        android:src="@drawable/ic_left_circle" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:id="@+id/yearThree"
+        android:layout_height="75dp"
+        android:layout_below="@+id/yearTwo"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/background_an3"></ImageView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="235dp"
+        android:fontFamily="@font/roboto_fonts_family"
+        android:text="Anul III"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textview_materii_an3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="193dp"
+        android:layout_marginTop="240dp"
+        android:layout_marginBottom="30dp"
+        android:text="0 Materii"
+        android:textColor="@color/white"
+        android:textSize="11dp"
+        android:textStyle="normal" />
+    <ImageView
+        android:id="@+id/yearThree_ic"
+        android:layout_width="37dp"
+        android:layout_height="37dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="284dp"
+        android:layout_marginTop="229dp"
+        android:layout_marginEnd="27dp"
+        android:src="@drawable/ic_left_circle" />
+
+    <ImageView
+        android:id="@+id/yearFour"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:layout_below="@+id/yearThree"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/background_an4"></ImageView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="330dp"
+        android:fontFamily="@font/roboto_fonts_family"
+        android:text="Anul IV"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textview_materii_an4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="193dp"
+        android:layout_marginTop="335dp"
+        android:layout_marginBottom="30dp"
+        android:text="0 Materii"
+        android:textColor="@color/white"
+        android:textSize="11dp"
+        android:textStyle="normal" />
+    <ImageView
+        android:id="@+id/yearFour_ic"
+        android:layout_width="37dp"
+        android:layout_height="37dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="284dp"
+        android:layout_marginTop="324dp"
+        android:layout_marginEnd="27dp"
+        android:src="@drawable/ic_left_circle" />
+
+
+
+
+
+</RelativeLayout>
