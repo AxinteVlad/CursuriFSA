@@ -47,7 +47,7 @@ public class MaterieActivity extends NavDrawerActivity {
         progressBar = findViewById(R.id.progressbar);
 
 
-        CursuriFsaApplication.getInstance().checkElev(fab);
+
 
         Intent intent = getIntent();
         String an = intent.getStringExtra("an");
@@ -58,6 +58,7 @@ public class MaterieActivity extends NavDrawerActivity {
 
 
         //fab button
+        CursuriFsaApplication.getInstance().checkElev(fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,6 +80,8 @@ public class MaterieActivity extends NavDrawerActivity {
         FirestoreRecyclerOptions<Materie> options = new FirestoreRecyclerOptions.Builder<Materie>()
                 .setQuery(query,Materie.class)
                 .build();
+
+
 
         adapter = new MaterieAdapter(options);
         progressBar.setVisibility(View.GONE);

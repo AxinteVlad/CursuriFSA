@@ -1,35 +1,20 @@
 package com.axintevlad.cursurifsa.activities;
 
 import android.content.Intent;
-import android.graphics.PorterDuff;
-import android.support.annotation.NonNull;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MotionEvent;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Toast;
+
 import com.axintevlad.cursurifsa.R;
 import com.axintevlad.cursurifsa.adapters.ViewPagerAdapter;
-import com.axintevlad.cursurifsa.models.Curs;
 import com.axintevlad.cursurifsa.models.Materie;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.squareup.picasso.Picasso;
-import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
 import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator;
-
-import android.support.v7.widget.Toolbar;
-import java.util.Objects;
 
 public class SaveMaterieActivity extends AppCompatActivity {
 
@@ -58,7 +43,12 @@ public class SaveMaterieActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Inapoi");
         mToolbar.setNavigationIcon(R.drawable.ic_toolbar_back_arrow);
-
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         //view pager
         viewPager = findViewById(R.id.view_pager_materie);
         ViewPagerAdapter adapter = new ViewPagerAdapter(this, imageUrls);

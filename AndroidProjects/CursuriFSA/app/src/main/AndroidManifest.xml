@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".activities.SaveResurseActivity"></activity>
+        <activity android:name=".activities.OrarActivity"></activity>
+        <activity android:name=".activities.SaveResurseActivity" />
         <activity android:name=".activities.SaveCursActivity" />
         <activity android:name=".activities.BottomNavActivity" />
         <activity android:name=".activities.SaveMaterieActivity" />

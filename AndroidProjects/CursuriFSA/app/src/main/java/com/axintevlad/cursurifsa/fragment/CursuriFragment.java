@@ -130,4 +130,6 @@ public class CursuriFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
     }
+
+
 }

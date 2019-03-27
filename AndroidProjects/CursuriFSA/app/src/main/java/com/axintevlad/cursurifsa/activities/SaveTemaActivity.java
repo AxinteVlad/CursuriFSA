@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.support.v7.widget.Toolbar;
 
 import com.axintevlad.cursurifsa.R;
 import com.axintevlad.cursurifsa.models.Curs;
@@ -44,7 +45,7 @@ public class SaveTemaActivity extends AppCompatActivity {
     private Button alegeFisier,incarcaFisier,saveMaterie;
     private String an,id;
     private TextView textViewStatus;
-
+    private Toolbar mToolbar;
 
     private Uri pdfUri;
     private FirebaseStorage storage;
@@ -74,6 +75,17 @@ public class SaveTemaActivity extends AppCompatActivity {
 
         Log.d(TAG, "INTENTEXTRA: " + an + " " + id);
 
+        //tooldbar
+        mToolbar = findViewById(R.id.toolbar_custom_tema);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setTitle("Inapoi");
+        mToolbar.setNavigationIcon(R.drawable.ic_toolbar_back_arrow);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
 
         saveMaterie.setOnClickListener(new View.OnClickListener() {

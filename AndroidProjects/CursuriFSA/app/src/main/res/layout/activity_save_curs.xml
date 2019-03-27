@@ -4,70 +4,105 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.SaveCursActivity">
+    tools:context=".activities.SaveCursActivity"
+    android:background="@color/white">
 
-
+    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/toolbar_custom_curs"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp"
+        android:background="@color/white"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.ActionBar"></android.support.v7.widget.Toolbar>
+    <View
+        android:id="@+id/drop_shadow"
+        android:layout_width="match_parent"
+        android:layout_below="@id/toolbar_custom_curs"
+        android:layout_height="5dp"
+        android:background="@drawable/toolbar_dropshadow" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
+        android:layout_below="@+id/drop_shadow"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_marginTop="6dp">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
-            android:text="Salveaza un curs nou"
+            android:fontFamily="@font/roboto_fonts_family"
+            android:text="Adauga un curs nou"
             android:textAlignment="center"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-            android:textColor="@color/colorPrimaryDark" />
+            android:textColor="@color/primaryText"
+            android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/edittext_nume_curs"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:hint="Numele cursului"
-            android:padding="10dp" />
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="16dp"
+            app:errorEnabled="true">
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/edittext_nume_curs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_fonts_family"
+                android:hint="Nume curs"
+                android:padding="10dp"
+                android:textSize="16dp" />
+        </android.support.design.widget.TextInputLayout>
 
-        <EditText
-            android:id="@+id/edittext_link_curs"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:hint="Link"
-            android:maxLines="1"
-            android:padding="10dp" />
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="16dp"
+            app:errorEnabled="true">
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/edittext_link_curs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_fonts_family"
+                android:hint="Link curs"
+                android:padding="10dp"
+                android:textSize="16dp" />
+        </android.support.design.widget.TextInputLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_margin="16dp"
             android:text="SAU"
             android:textColor="@color/black"
-            android:textStyle="bold"
             android:textSize="24dp"
-            android:layout_margin="16dp"/>
+            android:textStyle="bold" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp">
+
             <Button
                 android:id="@+id/button_alegeFisier"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Alege fisier"/>
+                android:text="Alege fisier" />
 
             <Button
                 android:id="@+id/button_incarcaFisier"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Incarca fisier"/>
+                android:text="Incarca fisier" />
         </LinearLayout>
 
         <ProgressBar
@@ -75,27 +110,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:visibility="invisible"
             android:layout_marginTop="16dp"
-            />
+            android:visibility="invisible" />
+
         <TextView
             android:id="@+id/textViewStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textSize="16dp"
-            android:textColor="@color/buttonNormal"/>
+            android:textColor="@color/buttonNormal"
+            android:textSize="16dp" />
 
         <Button
             android:id="@+id/button_save_curs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:background="@color/progress"
-            android:text="Salveaza"
+            android:layout_width="265dp"
+            android:layout_height="41dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/round_button_save"
+            android:text="Salveaza Curs"
+            android:fontFamily="@font/roboto_fonts_family"
+            android:layout_gravity="center"
             android:textAllCaps="false"
-            android:textColor="@color/white" />
-
+            android:textColor="@color/white"
+            android:elevation="3dp"
+            />
 
 
     </LinearLayout>

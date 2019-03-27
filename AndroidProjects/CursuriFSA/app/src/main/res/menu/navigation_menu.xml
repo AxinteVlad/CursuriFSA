@@ -17,7 +17,7 @@
     </item>
 
     <item android:id="@+id/nav_calendar_examene"
-        android:title="@string/Calendar_Examene"
+        android:title="Examene"
         android:icon="@drawable/ic_calendar">
     </item>
 

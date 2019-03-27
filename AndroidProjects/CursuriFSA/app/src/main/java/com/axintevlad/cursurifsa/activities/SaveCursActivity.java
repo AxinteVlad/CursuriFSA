@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.support.v7.widget.Toolbar;
 
 import com.axintevlad.cursurifsa.CursuriFsaApplication;
 import com.axintevlad.cursurifsa.R;
@@ -50,6 +51,7 @@ public class SaveCursActivity extends AppCompatActivity {
     private String an,id;
     private TextView textViewStatus;
     private int TIP_FRAGMENT;
+    private Toolbar mToolbar;
 
     private Uri pdfUri;
     private FirebaseStorage storage;
@@ -71,6 +73,18 @@ public class SaveCursActivity extends AppCompatActivity {
         saveMaterie = findViewById(R.id.button_save_curs);
         progressBar = findViewById(R.id.progressbar_curs);
         textViewStatus = findViewById(R.id.textViewStatus);
+
+        //tooldbar
+        mToolbar = findViewById(R.id.toolbar_custom_curs);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setTitle("Inapoi");
+        mToolbar.setNavigationIcon(R.drawable.ic_toolbar_back_arrow);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
 
         Intent intentExtra = getIntent();

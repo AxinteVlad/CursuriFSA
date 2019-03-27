@@ -11,10 +11,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -24,6 +26,8 @@ import com.axintevlad.cursurifsa.models.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import org.w3c.dom.Text;
+
 
 public abstract class NavDrawerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -32,9 +36,11 @@ public abstract class NavDrawerActivity extends AppCompatActivity implements Nav
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
 
+
     private String TAG = NavDrawerActivity.class.getSimpleName();
 
-    private TextView mEmailTextView;
+    private ImageView imageViewBackButton;
+    private TextView textViewEmail;
 
     private FirebaseAuth mAuth;
 
@@ -46,10 +52,12 @@ public abstract class NavDrawerActivity extends AppCompatActivity implements Nav
         content_view = findViewById(R.id.content_view);
         navigation_view = findViewById(R.id.navigation_view);
         mDrawerLayout = findViewById(R.id.drawer_layout);
+        textViewEmail = findViewById(R.id.nav_drawer_email);
 
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.nav_open, R.string.nav_clsed);
         mDrawerLayout.addDrawerListener(mDrawerToggle);
         mDrawerToggle.syncState();
+
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -64,12 +72,19 @@ public abstract class NavDrawerActivity extends AppCompatActivity implements Nav
         navigation_view.setNavigationItemSelectedListener(this);
 
         //Initializare nume,email,poza
-        View header = navigation_view.getHeaderView(0);
-        mEmailTextView = header.findViewById(R.id.nav_header_email);
+       View header = navigation_view.getHeaderView(0);
+       imageViewBackButton = header.findViewById(R.id.nav_header_back);
+       imageViewBackButton.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               mDrawerLayout.closeDrawer(Gravity.LEFT);
+           }
+       });
+
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if(user != null){
-            mEmailTextView.setText(user.getEmail());
-        }
+           textViewEmail.setText(user.getEmail());
+       }
 
 
 
