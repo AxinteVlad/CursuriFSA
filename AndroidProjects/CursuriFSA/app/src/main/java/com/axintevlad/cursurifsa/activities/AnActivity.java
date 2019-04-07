@@ -7,12 +7,23 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.axintevlad.cursurifsa.MainActivity;
 import com.axintevlad.cursurifsa.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class AnActivity extends NavDrawerActivity {
     private ImageView yearOne, yearTwo, yearThree, yearFour;
@@ -20,6 +31,8 @@ public class AnActivity extends NavDrawerActivity {
     private String an;
     private FirebaseFirestore db;
     private static final String TAG = "AnActivity";
+    private Map<String,Object> user = new HashMap<>();
+    private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +78,7 @@ public class AnActivity extends NavDrawerActivity {
             }
         });
 
-
+        retriveToken();
     }
 
     @Override
@@ -122,4 +135,36 @@ public class AnActivity extends NavDrawerActivity {
             }
         });
     }
+    private void retriveToken(){
+        db = FirebaseFirestore.getInstance();
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "getInstanceId failed", task.getException());
+                            return;
+                        }
+                        final String userUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                        // Get new Instance ID token
+                        String token = task.getResult().getToken();
+                        user.put("tokenId",token);
+                        // Log
+                        Log.d(TAG,"Token: " + token);
+                        //do2qj9js4UY:APA91bF9czm_xrIkA745skxquHM6sSigRvWM26IGLe3cI9MP_0LwiQplV_k0fq5hae7-2ZBgmtCyg3AeNYtrc7Cc_wxku1i61LPEdZMCA8mtJCXkzYY-Fd-hnYr7hDSsDsg1eAH9qlA9
+                        db.collection("useri").document(userUID).set(user, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Log.d(TAG, "Token adaugat "+ userUID+" in bd ");
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.w(TAG, "Error adding document in bd", e);
+                            }
+                        });
+                    }
+                });
+    }
+
 }

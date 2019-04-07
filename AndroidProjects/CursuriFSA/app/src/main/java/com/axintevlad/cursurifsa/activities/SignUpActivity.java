@@ -25,6 +25,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -69,6 +71,8 @@ public class SignUpActivity extends AppCompatActivity {
         builder.setView(R.layout.layout_loading_dialog);
         final AlertDialog dialog = builder.create();
 
+
+
         if(TextUtils.isEmpty(email)){
             Toast.makeText(this,"Nu ai introdus un email",Toast.LENGTH_SHORT).show();
         }else if(TextUtils.isEmpty(password)){
@@ -89,6 +93,7 @@ public class SignUpActivity extends AppCompatActivity {
                     if(task.isSuccessful()){
                         Toast.makeText(SignUpActivity.this, "Inregistrat", Toast.LENGTH_SHORT).show();
                         String userUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
                         user.put("userUID",userUID);
                         db.collection("useri/").document(userUID).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
@@ -118,8 +123,39 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void logIn(){
         //trece la mainactivity
-        Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+        Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    private void retriveToken(){
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "getInstanceId failed", task.getException());
+                            return;
+                        }
+                        final String userUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                        // Get new Instance ID token
+                        String token = task.getResult().getToken();
+                        user.put("tokenId",token);
+                        // Log
+                        Log.d(TAG,"Token: " + token);
+                        //do2qj9js4UY:APA91bF9czm_xrIkA745skxquHM6sSigRvWM26IGLe3cI9MP_0LwiQplV_k0fq5hae7-2ZBgmtCyg3AeNYtrc7Cc_wxku1i61LPEdZMCA8mtJCXkzYY-Fd-hnYr7hDSsDsg1eAH9qlA9
+                        db.collection("useri").document(userUID).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Log.d(TAG, "Token adaugat "+ userUID+" in bd ");
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.w(TAG, "Error adding document in bd", e);
+                            }
+                        });
+                    }
+                });
     }
 }

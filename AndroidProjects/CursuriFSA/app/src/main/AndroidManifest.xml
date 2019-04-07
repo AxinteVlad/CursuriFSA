@@ -13,7 +13,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".activities.OrarActivity"></activity>
+        <service android:name=".MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <activity android:name=".activities.ProfilActivity" />
+        <activity android:name=".activities.OrarActivity" />
         <activity android:name=".activities.SaveResurseActivity" />
         <activity android:name=".activities.SaveCursActivity" />
         <activity android:name=".activities.BottomNavActivity" />

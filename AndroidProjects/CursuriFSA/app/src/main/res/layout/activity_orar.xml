@@ -1,8 +1,29 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.design.widget.CoordinatorLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.OrarActivity">
-
-</android.support.constraint.ConstraintLayout>
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<com.github.tlaabs.timetableview.TimetableView
+    android:id="@+id/timetable"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:column_count="6"
+    app:header_title="@array/zile"
+    app:row_count="12"
+    app:start_time="8"
+    app:sticker_colors="@color/colorAccent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+     />
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/ic_fab_add"
+        app:fabSize="normal"
+        />
+</android.support.design.widget.CoordinatorLayout>

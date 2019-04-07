@@ -46,15 +46,10 @@ public class MaterieActivity extends NavDrawerActivity {
         final FloatingActionButton fab = findViewById(R.id.fab);
         progressBar = findViewById(R.id.progressbar);
 
-
-
-
         Intent intent = getIntent();
         String an = intent.getStringExtra("an");
         materiiRef = db.collection(an);
         setUpRecyclerView();
-
-
 
 
         //fab button

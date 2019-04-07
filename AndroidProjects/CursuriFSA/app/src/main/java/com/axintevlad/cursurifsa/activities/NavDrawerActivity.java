@@ -173,13 +173,13 @@ public abstract class NavDrawerActivity extends AppCompatActivity implements Nav
                 break;
             case R.id.nav_cursuri:
                 Log.d(TAG, "open Journey List Activity");
-                Intent c = new Intent(this, MainActivity.class);
+                Intent c = new Intent(this, OrarActivity.class);
                 startActivity(c);
                 break;
 
-            case R.id.nav_orar:
-                Log.d(TAG, "open About Activity");
-                Intent a = new Intent(this, MainActivity.class);
+            case R.id.nav_profil:
+                Log.d(TAG, "open profil Activity");
+                Intent a = new Intent(this, ProfilActivity.class);
                 startActivity(a);
                 break;
             case R.id.nav_logout:

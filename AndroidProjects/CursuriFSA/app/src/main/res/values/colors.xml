@@ -19,5 +19,7 @@
     <color name="white">#ffffff</color>
     <color name="grey">#70ffffff</color>
     <color name="black">#000000</color>
-    <color name="red">#AE3333</color>p@
+    <color name="red">#AE3333</color>
+
+    <color name="medium_dark_gray">#7F7F7F</color>
 </resources>

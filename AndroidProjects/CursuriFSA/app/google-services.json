@@ -15,8 +15,12 @@
       },
       "oauth_client": [
         {
-          "client_id": "132203962753-k9ls9nlc5lgbpghjsapgvdp19l1ph4p0.apps.googleusercontent.com",
-          "client_type": 3
+          "client_id": "132203962753-h3sh53i84lvpg1hthnoa9uu6rujeiv3q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.axintevlad.cursurifsa",
+            "certificate_hash": "addbee5862f03d5638ffbfa684ba0f9e2af44251"
+          }
         }
       ],
       "api_key": [
@@ -25,15 +29,13 @@
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
+          "other_platform_oauth_client": [
+            {
+              "client_id": "132203962753-k9ls9nlc5lgbpghjsapgvdp19l1ph4p0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

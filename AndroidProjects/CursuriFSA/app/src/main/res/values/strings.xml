@@ -13,7 +13,23 @@
     <string name="teme">Teme</string>
     <string name="cursuri">Cursuri</string>
 
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+
+    <string name="luni">Luni</string>
+    <string name="marti">Marti</string>
+    <string name="miercuri">Miercuri</string>
+    <string name="joi">Joi</string>
+    <string name="vineri">Vineri</string>
+    <string name="an">2018/1029</string>
+    <string-array name="zile">
+        <item>@string/an</item>
+        <item>@string/luni</item>
+        <item>@string/marti</item>
+        <item>@string/miercuri</item>
+        <item>@string/joi</item>
+        <item>@string/vineri</item>
+    </string-array>
 </resources>
