@@ -132,4 +132,5 @@ public class CursuriFragment extends Fragment {
     }
 
 
+
 }

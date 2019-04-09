@@ -16,6 +16,7 @@ import com.axintevlad.cursurifsa.R;
 import com.axintevlad.cursurifsa.fragment.CursuriFragment;
 import com.axintevlad.cursurifsa.fragment.ResurseFragment;
 import com.axintevlad.cursurifsa.fragment.TemeFragment;
+import com.axintevlad.cursurifsa.models.Materie;
 
 public class BottomNavActivity extends NavDrawerActivity {
 
