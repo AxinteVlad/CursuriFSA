@@ -21,6 +21,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -78,7 +79,8 @@ public class AnActivity extends NavDrawerActivity {
             }
         });
 
-        retriveToken();
+        //Add to Activity incercari notifcari
+        FirebaseMessaging.getInstance().subscribeToTopic("5DEgLY7ypkWjwF5Et0RW");
     }
 
     @Override
@@ -135,36 +137,6 @@ public class AnActivity extends NavDrawerActivity {
             }
         });
     }
-    private void retriveToken(){
-        db = FirebaseFirestore.getInstance();
-        FirebaseInstanceId.getInstance().getInstanceId()
-                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                        if (!task.isSuccessful()) {
-                            Log.w(TAG, "getInstanceId failed", task.getException());
-                            return;
-                        }
-                        final String userUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                        // Get new Instance ID token
-                        String token = task.getResult().getToken();
-                        user.put("tokenId",token);
-                        // Log
-                        Log.d(TAG,"Token: " + token);
-                        //do2qj9js4UY:APA91bF9czm_xrIkA745skxquHM6sSigRvWM26IGLe3cI9MP_0LwiQplV_k0fq5hae7-2ZBgmtCyg3AeNYtrc7Cc_wxku1i61LPEdZMCA8mtJCXkzYY-Fd-hnYr7hDSsDsg1eAH9qlA9
-                        db.collection("useri").document(userUID).set(user, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                Log.d(TAG, "Token adaugat "+ userUID+" in bd ");
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Log.w(TAG, "Error adding document in bd", e);
-                            }
-                        });
-                    }
-                });
-    }
+
 
 }

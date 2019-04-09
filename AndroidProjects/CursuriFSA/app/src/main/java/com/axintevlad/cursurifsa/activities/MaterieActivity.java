@@ -71,7 +71,7 @@ public class MaterieActivity extends NavDrawerActivity {
 
     private void setUpRecyclerView() {
 
-        Query query = materiiRef.orderBy("titlu",Query.Direction.DESCENDING);
+        Query query = materiiRef.orderBy("titlu",Query.Direction.ASCENDING);
         FirestoreRecyclerOptions<Materie> options = new FirestoreRecyclerOptions.Builder<Materie>()
                 .setQuery(query,Materie.class)
                 .build();

@@ -109,4 +109,9 @@ public class BottomNavActivity extends NavDrawerActivity {
         fragmentTransaction.replace(R.id.frame_main,fragment);
         fragmentTransaction.commit();
     }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 }

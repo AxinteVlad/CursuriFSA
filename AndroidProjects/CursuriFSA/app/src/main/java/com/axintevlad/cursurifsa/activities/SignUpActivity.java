@@ -93,7 +93,8 @@ public class SignUpActivity extends AppCompatActivity {
                     if(task.isSuccessful()){
                         Toast.makeText(SignUpActivity.this, "Inregistrat", Toast.LENGTH_SHORT).show();
                         String userUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
+                        //retrive token an put in db
+                        retriveToken();
                         user.put("userUID",userUID);
                         db.collection("useri/").document(userUID).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
@@ -158,4 +159,6 @@ public class SignUpActivity extends AppCompatActivity {
                     }
                 });
     }
+
+
 }

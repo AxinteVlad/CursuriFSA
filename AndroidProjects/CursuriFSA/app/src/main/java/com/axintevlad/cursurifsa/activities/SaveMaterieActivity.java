@@ -2,9 +2,11 @@ package com.axintevlad.cursurifsa.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -12,15 +14,21 @@ import android.widget.Toast;
 import com.axintevlad.cursurifsa.R;
 import com.axintevlad.cursurifsa.adapters.ViewPagerAdapter;
 import com.axintevlad.cursurifsa.models.Materie;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator;
 
-public class SaveMaterieActivity extends AppCompatActivity {
+import java.util.HashMap;
+import java.util.Map;
 
+public class SaveMaterieActivity extends AppCompatActivity {
+    private static final String TAG = "SaveMaterieActivity";
     private EditText editTextNume,editTextDescriere;
     private String imageUrl;
-
+    private String materieUid;
     private String[] imageUrls = new String[]{
             "https://firebasestorage.googleapis.com/v0/b/cursurifsa.appspot.com/o/Header_materii%2Fmaterie_hader1.png?alt=media&token=ab12d3de-7b5f-4383-adc5-81eba83c94f1",
             "https://firebasestorage.googleapis.com/v0/b/cursurifsa.appspot.com/o/Header_materii%2Fmaterie_hader2.png?alt=media&token=de5b026e-ec75-462d-ba25-5758a389beda",
@@ -122,9 +130,19 @@ public class SaveMaterieActivity extends AppCompatActivity {
 
         Intent intentExtra = getIntent();
         String an = intentExtra.getStringExtra("an");
-        CollectionReference notebookRef = FirebaseFirestore.getInstance()
-                .collection(an);
-        notebookRef.add(new Materie(title, description,imageUrl));
+        CollectionReference materieRef = FirebaseFirestore.getInstance().collection(an);
+
+        materieRef.add(new Materie(title, description,imageUrl)).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                Log.d(TAG, "onSuccess: materie aduagata cu id "+ documentReference.getId());
+                documentReference.update("materieUid",documentReference.getId());
+            }
+        });
+
+
+
+
         Toast.makeText(this, "Materie adaugata", Toast.LENGTH_SHORT).show();
         finish();
     }

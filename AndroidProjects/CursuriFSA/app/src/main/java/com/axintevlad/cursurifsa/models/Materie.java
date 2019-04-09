@@ -9,6 +9,7 @@ public class Materie {
     private String titlu;
     private String descriere;
     private String imageUrl;
+    private String materieUid;
 
 
     public Materie() { }
@@ -40,5 +41,9 @@ public class Materie {
 
     public String getImageUrl() {
         return imageUrl;
+    }
+
+    public String getMaterieUid() {
+        return materieUid;
     }
 }
