@@ -16,6 +16,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import com.axintevlad.cursurifsa.activities.AnActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -42,8 +43,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         // TODO(developer): Handle FCM messages here.
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
         Log.d(TAG, "From: " + remoteMessage.getFrom());
-        Log.d(TAG, "Title: "+ remoteMessage.getNotification().getTitle());
-        Log.d(TAG, "Body: "+ remoteMessage.getNotification().getBody());
+     //   Log.d(TAG, "Title: "+ remoteMessage.getNotification().getTitle());
+     //   Log.d(TAG, "Body: "+ remoteMessage.getNotification().getBody());
 
 
         notificationManager =
@@ -55,13 +56,17 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         }
         int notificationId = new Random().nextInt(60000);
 
+        Intent resultIntent = new Intent(this, AnActivity.class);
+        PendingIntent resultPendingIntent = PendingIntent.getActivity(this,notificationId,resultIntent,PendingIntent.FLAG_UPDATE_CURRENT);
+
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, ADMIN_CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_calendar)  //a resource for your custom small icon
+                .setSmallIcon(R.drawable.ic_download_24px)  //a resource for your custom small icon
                 .setContentTitle(remoteMessage.getData().get("title")) //the "title" value you sent in your notification
-                .setContentText(remoteMessage.getData().get("message")) //ditto
+                .setContentText(remoteMessage.getData().get("body")) //ditto
                 .setAutoCancel(true)  //dismisses the notification on click
-                .setSound(defaultSoundUri);
+                .setSound(defaultSoundUri)
+                .setContentIntent(resultPendingIntent);
 
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
