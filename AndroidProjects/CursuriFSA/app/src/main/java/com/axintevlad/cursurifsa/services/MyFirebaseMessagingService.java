@@ -1,4 +1,4 @@
-package com.axintevlad.cursurifsa;
+package com.axintevlad.cursurifsa.services;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -16,6 +16,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import com.axintevlad.cursurifsa.R;
 import com.axintevlad.cursurifsa.activities.AnActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;

@@ -6,6 +6,11 @@ package com.axintevlad.cursurifsa.models;
 public class Subscription {
     private String subscribeId;
     private boolean status;
+    private String nume;
+
+    public String getNume() {
+        return nume;
+    }
 
     public String getSubscribeId() {
         return subscribeId;

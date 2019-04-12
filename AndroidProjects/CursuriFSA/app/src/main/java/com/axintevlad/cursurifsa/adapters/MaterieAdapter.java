@@ -64,6 +64,7 @@ public class MaterieAdapter  extends FirestoreRecyclerAdapter<Materie, MaterieAd
                             HashMap<String, Object> data = new HashMap<>();
                             data.put("subscribeId",model.getMaterieUid());
                             data.put("status",true);
+                            data.put("nume",model.getTitlu());
                             FirebaseFirestore db = FirebaseFirestore.getInstance();
                             db.collection("useri").document(FirebaseAuth.getInstance().getUid())
                                     .collection("subs").document(model.getMaterieUid()).set(data).addOnSuccessListener(new OnSuccessListener<Void>() {

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activities.AdminActivity"
+    android:layout_marginTop="30dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textview_admin_email"
+        android:textStyle="normal"
+        android:fontFamily="@font/roboto_fonts_family"
+        android:textSize="18sp"
+        android:textColor="#333B48"
+        android:text="Email user"
+        android:layout_gravity="start|center"
+        android:layout_marginStart="30dp"
+        android:layout_weight="0.5"/>
+
+    <Switch
+        android:id="@+id/switch_admin_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_marginEnd="30dp"
+        android:layout_weight="0.1"/>
+
+
+</LinearLayout>

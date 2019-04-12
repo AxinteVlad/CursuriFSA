@@ -1,18 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<LinearLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/informatii_recyclerview"
-    tools:context=".fragment.InformatiiFragment">
-<ScrollView
-    android:id="@+id/informatii_scrollableview"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="30dp">
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
-</ScrollView>
-</android.support.v7.widget.RecyclerView>
+        android:layout_height="wrap_content"
+        app:errorEnabled="true"
+        android:focusableInTouchMode="true"
+        android:layout_weight="0.8"
+        >
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/edittext_facultate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_fonts_family"
+            android:background="@null"
+            android:hint="Facultate"
+            android:padding="10dp"
+            android:textSize="16dp" />
+    </android.support.design.widget.TextInputLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView_edit_facultate"
+            android:layout_gravity="center"
+            android:text="Edit"
+            android:textSize="16dp"
+            android:fontFamily="@font/roboto_fonts_family"
+            android:textColor="@color/colorAccent"
+            android:layout_weight="0"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp">
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true"
+            android:layout_weight="0.8">
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/edittext_an"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_fonts_family"
+                android:background="@null"
+                android:hint="An"
+                android:padding="10dp"
+                android:textSize="16dp" />
+        </android.support.design.widget.TextInputLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/textView_edit_an"
+            android:text="Edit"
+            android:textSize="16dp"
+            android:fontFamily="@font/roboto_fonts_family"
+            android:textColor="@color/colorAccent"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="30dp">
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true"
+            android:layout_weight="0.8">
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/edittext_telefon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_fonts_family"
+                android:background="@null"
+                android:hint="Telefon"
+                android:padding="10dp"
+                android:textSize="16dp" />
+        </android.support.design.widget.TextInputLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/textView_edit_telefon"
+            android:text="Edit"
+            android:textSize="16dp"
+            android:fontFamily="@font/roboto_fonts_family"
+            android:textColor="@color/colorAccent"/>
+    </LinearLayout>
+
+</LinearLayout>

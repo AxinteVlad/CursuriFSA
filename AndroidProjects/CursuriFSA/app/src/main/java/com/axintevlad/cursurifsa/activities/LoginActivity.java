@@ -33,7 +33,7 @@ import java.util.Map;
 public class LoginActivity extends AppCompatActivity {
 
     private static String TAG = LoginActivity.class.getSimpleName();
-    private static String tip_profesor = "profesor";
+    private static String tip_admin = "admin";
     private FirebaseAuth mAuth;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -112,10 +112,10 @@ public class LoginActivity extends AppCompatActivity {
                                         User user = User.getInstance();
                                         user = document.toObject(User.class);
                                         Log.d(TAG, "DocumentSnapshot data: " + document.getData()+"///////////" + user.getTip());
-                                        if(user.getTip().equals(tip_profesor)){
+                                        if(user.getTip().equals(tip_admin)){
                                             //inchide progress
                                             dialog.dismiss();
-                                            Intent intent = new Intent(LoginActivity.this, AnActivity.class);
+                                            Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
                                             startActivity(intent);
                                             finish();
                                         }else{
