@@ -23,6 +23,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -38,8 +39,9 @@ public class LoginActivity extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
-    private Button buttonLogin,buttonSignup;
-    private TextView emailEditText,passwordEditText;
+    private Button buttonLogin;
+    private TextView emailEditText,passwordEditText,textViewSignUp;
+
 
 
     @Override
@@ -47,18 +49,19 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        buttonSignup = findViewById(R.id.button_signup);
+        textViewSignUp = findViewById(R.id.textView_signup);
         buttonLogin = findViewById(R.id.button_login);
         emailEditText = findViewById(R.id.text_email);
         passwordEditText = findViewById(R.id.text_password);
         mAuth = FirebaseAuth.getInstance();
-
+        checkUserLoggedIn();
 
         if(mAuth.getCurrentUser() != null){
             logIn();
         }
 
-        buttonSignup.setOnClickListener(new View.OnClickListener() {
+
+        textViewSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
@@ -78,8 +81,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void logIn(){
-        String email = emailEditText.getText().toString();
-        String password = passwordEditText.getText().toString();
+        String email = emailEditText.getText().toString().trim();
+        String password = passwordEditText.getText().toString().trim();
 
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -115,7 +118,7 @@ public class LoginActivity extends AppCompatActivity {
                                         if(user.getTip().equals(tip_admin)){
                                             //inchide progress
                                             dialog.dismiss();
-                                            Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
+                                            Intent intent = new Intent(LoginActivity.this, AdminTabActivity.class);
                                             startActivity(intent);
                                             finish();
                                         }else{
@@ -148,5 +151,13 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+    private void checkUserLoggedIn(){
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
 
+        if (user != null) {
+            finish();
+            startActivity(new Intent(LoginActivity.this, AnActivity.class));
+        }
+    }
 }

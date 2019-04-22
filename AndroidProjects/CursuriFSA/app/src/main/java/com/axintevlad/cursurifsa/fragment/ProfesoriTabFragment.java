@@ -1,16 +1,17 @@
-package com.axintevlad.cursurifsa.activities;
+package com.axintevlad.cursurifsa.fragment;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.axintevlad.cursurifsa.R;
-import com.axintevlad.cursurifsa.adapters.SubscriptiiAdapter;
 import com.axintevlad.cursurifsa.adapters.UserAdapter;
-import com.axintevlad.cursurifsa.models.Subscription;
 import com.axintevlad.cursurifsa.models.User;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -18,43 +19,48 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
-public class AdminActivity extends AppCompatActivity {
+
+public class ProfesoriTabFragment extends Fragment {
+
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseAuth user = FirebaseAuth.getInstance();
     private UserAdapter adapter;
-    private Toolbar mToolbar;
+
+    public ProfesoriTabFragment() {
+        // Required empty public constructor
+    }
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin);
-
-        //tooldbar
-        mToolbar = findViewById(R.id.toolbar_custom);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("Modificare tip useri");
-
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_profesori_tab, container, false);
 
         CollectionReference useriRef = db.collection("useri");
-        Query query = useriRef.orderBy("email",Query.Direction.ASCENDING);
+        Query query = useriRef.orderBy("email", Query.Direction.ASCENDING).whereEqualTo("tip", "profesor");
         FirestoreRecyclerOptions<User> options = new FirestoreRecyclerOptions.Builder<User>()
-                .setQuery(query,User.class)
+                .setQuery(query, User.class)
                 .build();
 
-        adapter = new UserAdapter(options,AdminActivity.this);
+        adapter = new UserAdapter(options, getActivity());
 
-        RecyclerView recyclerView = findViewById(R.id.admin_recylcleView);
+        RecyclerView recyclerView = view.findViewById(R.id.recylcleview_profesoritab);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
+
+
+        return view;
     }
-    protected void onStart() {
+
+    @Override
+    public void onStart() {
         super.onStart();
         adapter.startListening();
     }
 
     @Override
-    protected void onStop() {
+    public void onStop() {
         super.onStop();
         adapter.stopListening();
     }

@@ -11,10 +11,11 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".activities.AdminActivity"></activity>
+        <activity android:name=".activities.AdminTabActivity"></activity>
+        <activity android:name=".activities.AdminActivity" />
 
         <service android:name=".services.MyFirebaseMessagingService">
             <intent-filter>
@@ -31,15 +32,17 @@
         <activity android:name=".activities.MaterieActivity" />
         <activity android:name=".activities.SaveTemaActivity" />
         <activity android:name=".activities.AnActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".activities.ProfesorActivity" />
         <activity android:name=".activities.SignUpActivity" />
-        <activity android:name=".activities.LoginActivity" />
+        <activity android:name=".activities.LoginActivity">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
         <activity android:name=".MainActivity" />
     </application>
 

@@ -36,9 +36,7 @@ public class SignUpActivity extends AppCompatActivity {
     private Map<String,Object> user = new HashMap<>();
     private FirebaseAuth mAuth;
     private Button signup;
-    private TextView emailEditText;
-    private TextView passwordEditText;
-    private Switch userType;
+    private TextView emailEditText,passwordEditText,editTextNume,textViewIntra;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
@@ -51,8 +49,8 @@ public class SignUpActivity extends AppCompatActivity {
         signup = findViewById(R.id.button_signup);
         emailEditText = findViewById(R.id.text_email);
         passwordEditText = findViewById(R.id.text_password);
-        userType = findViewById(R.id.switch_usertype);
-
+        editTextNume = findViewById(R.id.texview_nume);
+        textViewIntra = findViewById(R.id.textView_intra);
 
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,11 +58,20 @@ public class SignUpActivity extends AppCompatActivity {
                 crateNewAccount();
             }
         });
+        textViewIntra.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SignUpActivity.this,LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     private void crateNewAccount() {
-        String email = emailEditText.getText().toString();
-        String password = passwordEditText.getText().toString();
+        String email = emailEditText.getText().toString().trim();
+        String password = passwordEditText.getText().toString().trim();
+        String nume = editTextNume.getText().toString().trim();
         //progress bar
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(false); // if you want user to wait for some process to finish,
@@ -74,19 +81,18 @@ public class SignUpActivity extends AppCompatActivity {
 
 
         if(TextUtils.isEmpty(email)){
-            Toast.makeText(this,"Nu ai introdus un email",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Nu ai introdus un email!",Toast.LENGTH_SHORT).show();
         }else if(TextUtils.isEmpty(password)){
-            Toast.makeText(this,"Nu ai introdus o parola",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Nu ai introdus o parola!",Toast.LENGTH_SHORT).show();
+        }else if(TextUtils.isEmpty(nume)){
+            Toast.makeText(this,"Nu ai introdus numele!",Toast.LENGTH_SHORT).show();
         }
         else{
             dialog.show();
-            if(userType.isChecked()) {
-                user.put("email",email);
-                user.put("tip","profesor");
-            }else{
+                user.put("nume",nume);
                 user.put("email",email);
                 user.put("tip","elev");
-            }
+
             mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {

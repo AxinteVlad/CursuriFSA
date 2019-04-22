@@ -4,62 +4,120 @@
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_centerHorizontal="true"
     android:layout_centerVertical="true"
     android:layout_gravity="center"
     android:background="@color/white"
-    android:gravity="center"
+    android:gravity="center|top"
     tools:context=".activities.LoginActivity">
 
-
+    <ImageView
+        android:id="@+id/logo"
+        android:src="@drawable/logo"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        android:layout_marginTop="26dp"
+        />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Daca esti profesor activeaza butonul !"
-        android:textSize="20sp"
-        android:textColor="@color/black"
-        android:layout_marginBottom="20dp"/>
-    <Switch
-        android:id="@+id/switch_usertype"
-        android:layout_width="wrap_content"
+        android:text="Creare Cont"
+        android:textSize="28sp"
+        android:layout_gravity="start"
+        android:layout_marginStart="37dp"
+        android:layout_marginTop="37dp"
+        android:textColor="#333B48"
+        android:fontFamily="@font/roboto_light"
+        />
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Profesor"
-        android:textSize="20sp"
-        tools:layout_editor_absoluteX="99dp"
-        tools:layout_editor_absoluteY="413dp"
-        android:layout_marginBottom="30dp"/>
+        android:layout_marginStart="36dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginTop="22dp"
+        app:errorEnabled="true">
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/texview_nume"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_fonts_family"
+            android:hint="Nume"
+            android:padding="10dp"
+            android:textSize="16sp" />
+    </android.support.design.widget.TextInputLayout>
 
-    <EditText
-        android:id="@+id/text_email"
-        android:layout_width="wrap_content"
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Email"
-        android:inputType="textPersonName"
-        android:layout_marginBottom="20dp"
-       />
+        android:layout_marginStart="36dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginTop="13dp"
+        app:errorEnabled="true">
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/text_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_fonts_family"
+            android:hint="Adresa de email"
+            android:padding="10dp"
+            android:textSize="16sp" />
+    </android.support.design.widget.TextInputLayout>
 
-    <EditText
-        android:id="@+id/text_password"
-        android:layout_width="wrap_content"
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:layout_marginBottom="34dp"
-       />
+        android:layout_marginStart="36dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginTop="13dp"
+        app:errorEnabled="true">
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/text_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_fonts_family"
+            android:hint="Parola"
+            android:padding="10dp"
+            android:textSize="16sp" />
+    </android.support.design.widget.TextInputLayout>
 
     <Button
         android:id="@+id/button_signup"
-        android:layout_width="150dp"
-        android:layout_height="80dp"
-        android:background="@drawable/button_signup_background"
-        android:text="Inregistreaza-te"
+        android:layout_width="265dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/round_button_save"
+        android:text="CREEAZA CONTUL"
+        android:fontFamily="@font/roboto_fonts_family"
+        android:layout_gravity="center"
+        android:textAllCaps="false"
         android:textColor="@color/white"
-        android:layout_marginBottom="20dp"
-         />
+        android:elevation="3dp"
+        />
 
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ai cont?"
+            android:textColor="#333B48"
+            />
+        <TextView
+            android:id="@+id/textView_intra"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Intra!"
+            android:textColor="#004CC8"
+
+            />
 
 </android.support.v7.widget.LinearLayoutCompat>
 
+</android.support.v7.widget.LinearLayoutCompat>
