@@ -20,10 +20,10 @@ width="200"
     hspace="10" vspace="10">](https://i.imgur.com/XHlDVyl.png)    
 [<img src="https://i.imgur.com/oeABGFn.png" align="left"
 width="200"
-    hspace="10" vspace="10">](https://i.imgur.com/oeABGFn.png)    
+    hspace="10" >](https://i.imgur.com/oeABGFn.png)    
 [<img src="https://i.imgur.com/dmdjbIl.png" align="center"
 width="200"
-    hspace="10" vspace="10">](https://i.imgur.com/dmdjbIl.png)  
+    hspace="10">](https://i.imgur.com/dmdjbIl.png)  
 [<img src="https://i.imgur.com/RZV77fn.png" align="left"
 width="200"
     hspace="10" vspace="10">](https://i.imgur.com/RZV77fn.png)  
