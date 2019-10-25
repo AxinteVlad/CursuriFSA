@@ -14,13 +14,14 @@ width="200"
 width="200"
     hspace="10" vspace="10">](https://i.imgur.com/wcluQPg.jpg)
     
-    
+<br>
+<br>
 [<img src="https://i.imgur.com/XHlDVyl.png" align="left"
 width="200"
     hspace="20" vspace="20" >](https://i.imgur.com/XHlDVyl.png)    
 [<img src="https://i.imgur.com/oeABGFn.png" align="center"
 width="200"
-     >](https://i.imgur.com/oeABGFn.png)    
+   hspace="10" vspace="10" >](https://i.imgur.com/oeABGFn.png)    
 [<img src="https://i.imgur.com/dmdjbIl.png" align="left"
 width="200"
     hspace="10" vspace="10">](https://i.imgur.com/dmdjbIl.png)  
